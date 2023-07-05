@@ -1,3 +1,13 @@
+<?php
+
+include 'koneksi.php';    
+$query ="SELECT DATEDIFF(kadaluarsa, CURRENT_DATE()) AS selisih_hari, Nama_Obat, kode_produksi, produsen, Stok, Harga_Satuan,penyimpanan 
+FROM obat WHERE kadaluarsa <= DATE_ADD(CURRENT_DATE(), INTERVAL 7 DAY);;";
+$kadaluarsa = mysqli_query($koneksi, $query);
+
+                                            
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,71 +17,86 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Manajer - Dashboard</title>
+    <title>Dashboard</title>
 
-    <!-- Custom fonts for this template-->
+    <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
 
-    <!-- Custom styles for this template-->
+    <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet" />
-    <link href="manajer.css" rel="stylesheet" />
-  </head>
 
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <script defer src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script defer src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script defer src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Bootstrap Link -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+
+    <script defer src="tables.js"></script>
+  </head>
   <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
       <!-- Sidebar -->
-      <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #c7e9b0">
+      <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
           <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fa fa-plus-circle" style="color: #617a55"></i>
+            <i class="fas fa-laugh-wink"></i>
           </div>
-          <div class="sidebar-brand-text mx-2" style="color: #617a55; font-size: 25px">Apotik <sup>+</sup></div>
+          <div class="sidebar-brand-text mx-3">DIRECTION</div>
         </a>
 
         <!-- Divider -->
-        <hr class="sidebar-divider my-0" />
+        <hr class="text-white" />
 
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-          <a class="nav-link" href="index.html" style="color: #617a55; font-size: 20px">
-            <i class="fas fa-fw fa-tachometer-alt" style="color: #617a55; font-size: 20px"></i>
-            <span>Dashboard</span></a
-          >
+        <li class="nav-item">
+          <a class="nav-link" href="Paymentss.php">
+          <i class="fas fa-fw fa-cash-register"></i>
+            <span>Kasir</span>
+          </a>
         </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider" />
-
-        <!-- Nav Item - Pages Collapse Menu -->
+        <!-- Menu Obat -->
         <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" style="color: #617a55; font-size: 20px">
-            <i class="fas fa-fw fa-table" style="color: #617a55; font-size: 20px"></i>
-            <span>Table</span>
+          <a class="nav-link" href="obatKaryawan.php">
+            <i class="fas fa-fw fa-pills"></i>
+            <span>Obat</span>
           </a>
-          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="py-2 collapse-inner rounded" style="background-color: #b3c99c">
-              <h6 class="collapse-header" style="color: #617a55">data table:</h6>
-              <a class="collapse-item" href="tables.php" style="color: #617a55">Data Obat</a>
-              <a class="collapse-item" href="Expired.html" style="color: #617a55">Expired</a>
-            </div>
-          </div>
-          <a class="nav-link" href="inbox.html" style="color: #617a55; font-size: 20px">
-            <i class="fas fa-inbox" style="color: #617a55; font-size: 20px"></i>
+        </li>
+
+        <!-- Menu Expired -->
+        <li class="nav-item">
+          <a class="nav-link" href="Expiredkaryawan.php">
+            <i class="fas fa-fw fa-calendar"></i>
+            <span>Expired</span>
+          </a>
+        </li>
+
+        <!-- Menu Inbox -->
+        <li class="nav-item active">
+          <a class="nav-link" href="inboxkaryawan.php">
+            <i class="fas fa-fw fa-inbox"></i>
             <span>Inbox</span>
           </a>
         </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block" />
+        <!-- Menu Rekomendasi Obat -->
+        <li class="nav-item">
+          <a class="nav-link" href="diagnosa.php">
+            <i class="fas fa-fw fa-stethoscope"></i>
+            <span>Rekomendasi Obat</span>
+          </a>
+        </li>
+        <!--  -->
 
-        <!-- Sidebar Toggler (Sidebar) -->
-        <!-- <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div> -->
-      </ul>
+        <!-- Divider -->
+        <!-- <hr class="text-white" /> -->
+    </ul>
       <!-- End of Sidebar -->
 
       <!-- Content Wrapper -->
@@ -81,9 +106,11 @@
           <!-- Topbar -->
           <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
             <!-- Sidebar Toggle (Topbar) -->
-            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-              <i class="fa fa-bars"></i>
-            </button>
+            <form class="form-inline">
+              <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+              </button>
+            </form>
 
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
@@ -117,47 +144,37 @@
                 <!-- Dropdown - Alerts -->
                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                   <h6 class="dropdown-header">Alerts Center</h6>
-                  <a class="dropdown-item d-flex align-items-center" href="#">
+                  <?php
+                                // Menampilkan obat yang belum kadaluarsa
+                                while($row = mysqli_fetch_array($kadaluarsa)){?>
+
+                  <a class="dropdown-item d-flex align-items-center" href="inboxkaryawan.php">
                     <div class="mr-3">
                       <div class="icon-circle bg-warning">
                         <i class="fas fa-exclamation-triangle text-white"></i>
                       </div>
                     </div>
                     <div>
-                      <div class="small text-gray-500">December 2, 2019</div>
-                      Spending Alert: Paracetamol dengan kode obat 1234 akan kadaluarsa 3 hari lagi.
+                      <div class="small text-gray-500"><?php echo date('l, d-m-Y');?></div>
+                      <?php echo $row["Nama_Obat"]?>
+                      akan kadaluarsa
+                      <?php echo $row["selisih_hari"] ?>
+                      hari lagi.
                     </div>
                   </a>
-                  <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="mr-3">
-                      <div class="icon-circle bg-warning">
-                        <i class="fas fa-exclamation-triangle text-white"></i>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="small text-gray-500">December 2, 2019</div>
-                      Spending Alert: Promag dengan kode obat 1234 akan kadaluarsa 1 minggu lagi.
-                    </div>
-                  </a>
-                  <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="mr-3">
-                      <div class="icon-circle bg-warning">
-                        <i class="fas fa-exclamation-triangle text-white"></i>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="small text-gray-500">December 2, 2019</div>
-                      Spending Alert: Bodrex dengan kode obat 1234 akan kadaluarsa 3 hari lagi.
-                    </div>
-                  </a>
+                  <?php
+                                }
+                                ?>
                   <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                 </div>
               </li>
+
               <div class="topbar-divider d-none d-sm-block"></div>
+
               <!-- Nav Item - User Information -->
               <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">Manajer1</span>
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">Karyawan</span>
                   <img class="img-profile rounded-circle" src="img/undraw_profile.svg" />
                 </a>
                 <!-- Dropdown - User Information -->
@@ -190,52 +207,34 @@
 
             <!-- Content Row -->
             <div class="row">
-              <div class="col-lg-4 mb-4">
-                <!-- Illustrations -->
-                <div class="card shadow mb-4">
-                  <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-warning">Warning</h6>
-                  </div>
-                  <div class="card-body">
-                    <div class="text-center">
-                      <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 10rem" src="img\warning.png" alt="..." />
-                      <div class="small text-black-50">December 2, 2019</div>
-                      Spending Alert: Bodrex dengan kode obat 1234 akan kadaluarsa 3 hari lagi.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 mb-4">
-                <!-- Illustrations -->
-                <div class="card shadow mb-4">
-                  <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-warning">Warning</h6>
-                  </div>
-                  <div class="card-body">
-                    <div class="text-center">
-                      <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 10rem" src="img\warning.png" alt="..." />
-                      <div class="small text-black-50">December 2, 2019</div>
-                      Spending Alert: Bodrex dengan kode obat 1234 akan kadaluarsa 3 hari lagi.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 mb-4">
-                <!-- Illustrations -->
-                <div class="card shadow mb-4">
-                  <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-warning">Warning</h6>
-                  </div>
-                  <div class="card-body">
-                    <div class="text-center">
-                      <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 10rem" src="img\warning.png" alt="..." />
-                      <div class="small text-black-50">December 2, 2019</div>
-                      Spending Alert: Bodrex dengan kode obat 1234 akan kadaluarsa 3 hari lagi.
-                    </div>
-                  </div>
-                </div>
-              </div>
+              
+                <?php
+
+                  include 'koneksi.php';    
+                  $query ="SELECT DATEDIFF(kadaluarsa, CURRENT_DATE()) AS selisih_hari, Nama_Obat, kode_produksi, produsen, Stok, Harga_Satuan,penyimpanan 
+                  FROM obat WHERE kadaluarsa <= DATE_ADD(CURRENT_DATE(), INTERVAL 7 DAY);;";
+                  $kadaluarsa = mysqli_query($koneksi, $query);
+                                                        
+                  while($row = mysqli_fetch_assoc($kadaluarsa)){?>
+                    <div class="col-lg-4 mb-4">
+                      <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-warning">Warning</h6>
+                        </div>
+                        <div class="card-body">
+                          <div class="text-center">
+                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 10rem" src="img\warning.png" alt="..." />
+                            <div class="small text-black-50"><?php echo date('l, d-m-Y');?></div>
+                            <?php echo $row["Nama_Obat"]?> akan kadaluarsa <?php echo $row["selisih_hari"] ?> hari lagi.
+                          </div>
+                        </div>
+                      </div>
+                    </div>  
+                  <?php
+                  }
+                  ?>                      
             </div>
+
           </div>
         </div>
         <!-- End of Main Content -->

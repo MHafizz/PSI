@@ -19,7 +19,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Manajer - Tables</title>
+    <title>Dashboard</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -49,54 +49,61 @@ $kadaluarsa = mysqli_query($koneksi, $query);
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-              <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-              </div>
-              <div class="sidebar-brand-text mx-3">DIRECTION</div>
-            </a>
-    
-            <!-- Divider -->
-            <hr class="text-white" />
-    
-            <!-- Menu Dashboard -->
-            <li class="nav-item">
-              <a class="nav-link" href="index.php">
-                <i class="fas fa-fw fa-chart-line"></i>
-                <span>Dashboard</span>
-              </a>
-            </li>
-    
-            <!-- Menu Obat -->
-            <li class="nav-item">
-              <a class="nav-link" href="tables.php">
-                <i class="fas fa-fw fa-pills"></i>
-                <span>Obat</span>
-              </a>
-            </li>
-    
-            <!-- Menu Expired -->
-            <li class="nav-item active">
-              <a class="nav-link" href="Expired.php">
-                <i class="fas fa-fw fa-calendar"></i>
-                <span>Expired</span>
-              </a>
-            </li>
-    
-            <!-- Menu Inbox -->
-            <li class="nav-item">
-              <a class="nav-link" href="inbox.php">
-                <i class="fas fa-fw fa-inbox"></i>
-                <span>Inbox</span>
-              </a>
-            </li>
-            <!--  -->
-    
-            <!-- Divider -->
-            <!-- <hr class="text-white" /> -->
-        </ul>
+    <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">DIRECTION</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="text-white" />
+
+        <li class="nav-item">
+          <a class="nav-link" href="Paymentss.php">
+          <i class="fas fa-fw fa-cash-register"></i>
+            <span>Kasir</span>
+          </a>
+        </li>
+
+        <!-- Menu Obat -->
+        <li class="nav-item">
+          <a class="nav-link" href="obatKaryawan.php">
+            <i class="fas fa-fw fa-pills"></i>
+            <span>Obat</span>
+          </a>
+        </li>
+
+        <!-- Menu Expired -->
+        <li class="nav-item active">
+          <a class="nav-link" href="Expiredkaryawan.php">
+            <i class="fas fa-fw fa-calendar"></i>
+            <span>Expired</span>
+          </a>
+        </li>
+
+        <!-- Menu Inbox -->
+        <li class="nav-item">
+          <a class="nav-link" href="inboxkaryawan.php">
+            <i class="fas fa-fw fa-inbox"></i>
+            <span>Inbox</span>
+          </a>
+        </li>
+
+        <!-- Menu Rekomendasi Obat -->
+        <li class="nav-item">
+          <a class="nav-link" href="diagnosa.php">
+          <i class="fas fa-fw fa-stethoscope"></i>
+            <span>Rekomendasi Obat</span>
+          </a>
+        </li>
+        <!--  -->
+
+        <!-- Divider -->
+        <!-- <hr class="text-white" /> -->
+    </ul>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -160,7 +167,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                 // Menampilkan obat yang belum kadaluarsa
                                 while($row = mysqli_fetch_array($kadaluarsa)){?>
 
-                                    <a class="dropdown-item d-flex align-items-center" href="inbox.php">
+                                    <a class="dropdown-item d-flex align-items-center" href="inboxkaryawan.php">
                                         <div class="mr-3">
                                             <div class="icon-circle bg-warning">
                                                 <i class="fas fa-exclamation-triangle text-white"></i>
@@ -183,7 +190,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Manajer1</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Karyawan</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
