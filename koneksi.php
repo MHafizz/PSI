@@ -6,7 +6,7 @@ $username = "root";
 //password untuk mengakses database
 $password = "";
 //database yang digunakan
-$database = "direction";
+$database = "direction1";
 //script untuk koneksi ke database
 $koneksi = mysqli_connect($host,$username,$password,$database);
 ?>

@@ -1,11 +1,10 @@
 <?php
-
+require 'functionnbc.php';
 include 'koneksi.php';    
 $query ="SELECT DATEDIFF(kadaluarsa, CURRENT_DATE()) AS selisih_hari, Nama_Obat, kode_produksi, produsen, Stok, Harga_Satuan,penyimpanan 
 FROM obat WHERE kadaluarsa <= DATE_ADD(CURRENT_DATE(), INTERVAL 7 DAY);;";
 $kadaluarsa = mysqli_query($koneksi, $query);
-
-                                            
+                                  
 ?>
 
 <!DOCTYPE html>
@@ -19,84 +18,87 @@ $kadaluarsa = mysqli_query($koneksi, $query);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Manajer - Tables</title>
+    <title>Dashboard DIRECTION</title>
 
-    <!-- Custom fonts for this template -->
+    <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <script defer src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script defer src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script defer src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Bootstrap Link -->
+    <!-- Custom styles for this Bootstrap-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
-
-    <script defer src="tables.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
+
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-              <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-              </div>
-              <div class="sidebar-brand-text mx-3">DIRECTION</div>
-            </a>
-    
-            <!-- Divider -->
-            <hr class="text-white" />
-    
-            <!-- Menu Dashboard -->
-            <li class="nav-item">
-              <a class="nav-link" href="index.php">
-                <i class="fas fa-fw fa-chart-line"></i>
-                <span>Dashboard</span>
-              </a>
-            </li>
-    
-            <!-- Menu Obat -->
-            <li class="nav-item">
-              <a class="nav-link" href="tables.php">
-                <i class="fas fa-fw fa-pills"></i>
-                <span>Obat</span>
-              </a>
-            </li>
-    
-            <!-- Menu Expired -->
-            <li class="nav-item active">
-              <a class="nav-link" href="Expired.php">
-                <i class="fas fa-fw fa-calendar"></i>
-                <span>Expired</span>
-              </a>
-            </li>
-    
-            <!-- Menu Inbox -->
-            <li class="nav-item">
-              <a class="nav-link" href="inbox.php">
-                <i class="fas fa-fw fa-inbox"></i>
-                <span>Inbox</span>
-              </a>
-            </li>
-            <!--  -->
-    
-            <!-- Divider -->
-            <!-- <hr class="text-white" /> -->
-        </ul>
+    <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">DIRECTION</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="text-white" />
+
+        <li class="nav-item">
+          <a class="nav-link" href="Paymentss.php">
+          <i class="fas fa-fw fa-cash-register"></i>
+            <span>Kasir</span>
+          </a>
+        </li>
+
+        <!-- Menu Obat -->
+        <li class="nav-item">
+          <a class="nav-link" href="obatKaryawan.php">
+            <i class="fas fa-fw fa-pills"></i>
+            <span>Obat</span>
+          </a>
+        </li>
+
+        <!-- Menu Expired -->
+        <li class="nav-item">
+          <a class="nav-link" href="Expiredkaryawan.php">
+            <i class="fas fa-fw fa-calendar"></i>
+            <span>Expired</span>
+          </a>
+        </li>
+
+        <!-- Menu Inbox -->
+        <li class="nav-item">
+          <a class="nav-link" href="inboxkaryawan.php">
+            <i class="fas fa-fw fa-inbox"></i>
+            <span>Inbox</span>
+          </a>
+        </li>
+
+        <!-- Menu Rekomendasi Obat -->
+        <li class="nav-item active">
+          <a class="nav-link" href="diagnosa.php">
+          <i class="fas fa-fw fa-stethoscope"></i>
+            <span>Rekomendasi Obat</span>
+          </a>
+        </li>
+        <!--  -->
+
+        <!-- Divider -->
+        <!-- <hr class="text-white" /> -->
+    </ul>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -160,7 +162,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                 // Menampilkan obat yang belum kadaluarsa
                                 while($row = mysqli_fetch_array($kadaluarsa)){?>
 
-                                    <a class="dropdown-item d-flex align-items-center" href="inbox.php">
+                                    <a class="dropdown-item d-flex align-items-center" href="inboxkaryawan.php">
                                         <div class="mr-3">
                                             <div class="icon-circle bg-warning">
                                                 <i class="fas fa-exclamation-triangle text-white"></i>
@@ -179,11 +181,12 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                         </li>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
+
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Manajer1</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Karyawan</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -215,71 +218,119 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <!-- <h1 class="h3 mb-2 text-gray-800">expired</h1> -->
+                    <!-- <h1 class="h3 mb-2 text-gray-800">Data Obat</h1> -->
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Expired</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <div class="container">
-                                    <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th>No.</th>
-                                                <th>Nama</th>
-                                                <th>Kode Produksi</th>
-                                                <th>Produsen</th>
-                                                <th>Sisa Hari</th>
-                                                <th>Stok Obat</th>
-                                                <th>Harga</th>
-                                                <th>Penyimpanan</th>
-                                                <th>Keterangan</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            include 'koneksi.php';
-                                            $no=1;        
-                                            $query ="SELECT DATEDIFF(kadaluarsa, CURRENT_DATE()) AS selisih_hari, Nama_Obat, kode_produksi, produsen, Stok, Harga_Satuan,penyimpanan 
-                                                    FROM obat WHERE kadaluarsa <= DATE_ADD(CURRENT_DATE(), INTERVAL 7 DAY);;";
-                                            $obat = mysqli_query($koneksi, $query);
+                            <h6 class="m-0 font-weight-bold text-success">Hasil Rekomendasi Obat</h6>
+                            <!-- Button trigger modal -->
+                        
+                        <div class="card-body" style="margin: 0 50px;">                                                   
+                            <?php
+                                
+                                if(isset($_POST['submit'])){
 
-                                            // Menampilkan obat yang belum kadaluarsa
-                                            while($row = mysqli_fetch_array($obat)){?>
-                                                <tr>
-                                                    <td><?php echo $no++ ; ?>.</td>
-                                                    <!-- <td><?php echo $row["ID_Obat"]; ?></td> -->
-                                                    <td><?php echo $row["Nama_Obat"]; ?></td>
-                                                    <td><?php echo $row["kode_produksi"]; ?></td>
-                                                    <td><?php echo $row["produsen"]; ?></td>
-                                                    <td><?php echo $row["selisih_hari"]; ?> Hari</td>
-                                                    <td><?php echo $row["Stok"]; ?></td>
-                                                    <td><?php echo $row["Harga_Satuan"]; ?></td>
-                                                    <td><?php echo "Ruangan " . $row["penyimpanan"]; ?></td>
-                                                    <td> - </td>
-                                                </tr>                                                
-                                            <?php
-                                            }
-                                            ?>                                        
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>No.</th>
-                                                <th>Nama</th>
-                                                <th>Kode Produksi</th>
-                                                <th>Produsen</th>
-                                                <th>Sisa Hari</th>
-                                                <th>Stok Obat</th>
-                                                <th>Harga</th>
-                                                <th>Penyimpanan</th>
-                                                <th>Keterangan</th>
-                                            </tr>
-                                        </tfoot>
+                                    //MENGHITUNG ADA BERAPA KALI LABEL MUNCUL
+                                    $obatA = jumlah_label('Obat A');
+                                    $obatB = jumlah_label('Obat B');
+                                    $obatC = jumlah_label('Obat C');
+
+                                    //MENGHITUNG ADA BERAPA BANYAK FITUR GEJALA1 YANG MUNCUL PADA SETIAP LABEL
+                                    $gejala1A = hitung_jumlah("gejala1",$_POST["gejala1"],"Obat A");                                                                        
+                                    $gejala1B = hitung_jumlah("gejala1",$_POST["gejala1"],"Obat B");
+                                    $gejala1C = hitung_jumlah("gejala1",$_POST["gejala1"],"Obat C");
+
+                                    //MENGHITUNG ADA BERAPA BANYAK FITUR GEJALA2 YANG MUNCUL PADA SETIAP LABEL
+                                    // $gejala2A = hitung_jumlah("gejala2",$_POST["gejala2"],"Obat A");                                                                        
+                                    // $gejala2B = hitung_jumlah("gejala2",$_POST["gejala2"],"Obat B");
+                                    // $gejala2C = hitung_jumlah("gejala2",$_POST["gejala2"],"Obat C");
+
+                                    if ($_POST["usia"]<=18){
+                                        $usia = "Anak-anak";
+                                    }elseif($_POST["usia"]>18 && $_POST["usia"]<=60){
+                                        $usia = "Dewasa";
+                                    }else{
+                                        $usia = "Lanjut usia";
+                                    }
+
+                                    //MENGHITUNG ADA BERAPA BANYAK FITUR USIA YANG MUNCUL PADA SETIAP LABEL
+                                    $usiaA = hitung_jumlah("usia",$usia,"Obat A");                                                                        
+                                    $usiaB = hitung_jumlah("usia",$usia,"Obat B");
+                                    $usiaC = hitung_jumlah("usia",$usia,"Obat C");
+
+                                    //MENGHITUNG ADA BERAPA BANYAK FITUR RIWAYAT ALERGI YANG MUNCUL PADA SETIAP LABEL
+                                    $riwayat_alergiA = hitung_jumlah("riwayat_alergi",$_POST["riwayat_alergi"],"Obat A");                                                                        
+                                    $riwayat_alergiB = hitung_jumlah("riwayat_alergi",$_POST["riwayat_alergi"],"Obat B");
+                                    $riwayat_alergiC = hitung_jumlah("riwayat_alergi",$_POST["riwayat_alergi"],"Obat C");
+                                    
+                                    //MENGHITUNG NILAI NBC
+                                    $prob_obatA = ($gejala1A/$obatA)*
+                                    ($usiaA/$obatA)*($riwayat_alergiA/$obatA)*($obatA/total_label());
+                                    
+                                    $prob_obatB = ($gejala1B/$obatB)*
+                                    ($usiaB/$obatB)*($riwayat_alergiB/$obatB)*($obatB/total_label());
+
+                                    $prob_obatC = ($gejala1C/$obatC)*
+                                    ($usiaC/$obatC)*($riwayat_alergiC/$obatC)*($obatC/total_label());
+
+                                    $prob_total = $prob_obatA + $prob_obatB + $prob_obatC;
+
+                                    $prob_obatA /= $prob_total;
+                                    $prob_obatB /= $prob_total;
+                                    $prob_obatC /= $prob_total;                                    
+
+                                    $prob_obatA = number_format($prob_obatA,'4','.','');
+                                    $prob_obatB = number_format($prob_obatB,'4','.','');
+                                    $prob_obatC = number_format($prob_obatC,'4','.','');
+
+                                    $rekomendasi ="";
+
+                                    //MENENTUKAN NILAI TERBESAR
+                                    if($prob_obatA > $prob_obatB && $prob_obatA > $prob_obatC){
+                                        $rekomendasi =  "Obat A";
+                                    }elseif($prob_obatB > $prob_obatC) {
+                                        $rekomendasi =  "Obat B";
+                                    }else {
+                                        $rekomendasi = "Obat C";
+                                    }
+                                                                            
+                                    //  echo " $rekomendasi\n $prob_obatA \n $prob_obatB \n $prob_obatC $usia";                             
+                                }
+
+                            ?>
+                            <h1 class="card-title" style="text-align: center;"><?php echo $rekomendasi ?></h1>
+                            <br>
+                            <div style="display: flex;">
+                                <div style="flex: 1;">
+                                    <img src="img\obat.jpg" alt="" class = "rounded"style="width: 600px;">
+                                </div>
+                                <div style="flex: 1;">                                                                    
+                                    <table>
+                                        <tr>
+                                            <th>Indikasi :</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni minus, culpa sit quae nesciunt aliquam facere. At eligendi odit alias.</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Aturan Pakai:</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni minus, culpa sit quae nesciunt aliquam facere. At eligendi odit alias.</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Komposisi:</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni minus, culpa sit quae nesciunt aliquam facere. At eligendi odit alias.</td>
+                                        </tr>
                                     </table>
                                 </div>
+                            </div>    
+                            <br>
+                            <div style="display: flex; justify-content: center;">
+                                <a class="btn btn-primary" href="diagnosa.php" role="button">Kembali</a>
                             </div>
                         </div>
                     </div>
@@ -294,7 +345,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Obat 2023</span>
                     </div>
                 </div>
             </footer>
@@ -342,11 +393,11 @@ $kadaluarsa = mysqli_query($koneksi, $query);
     <script src="js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
 
