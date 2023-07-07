@@ -18,7 +18,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Manajer - Tables</title>
+    <title>Dashboard</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -48,54 +48,69 @@ $kadaluarsa = mysqli_query($koneksi, $query);
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-              <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-              </div>
-              <div class="sidebar-brand-text mx-3">DIRECTION</div>
+    <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">DIRECTION</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="text-white" />
+
+        <!-- Menu Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="index.php">
+            <i class="fas fa-fw fa-chart-line"></i>
+            <span>Dashboard</span>
             </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Obat</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class=" py-2 collapse-inner rounded">
+                        <h6 class="collapse-header" style="color: #fff">data table:</h6>
+                        <a class="collapse-item" href="tables.php" style="color: #fff">Tabel Obat</a>
+                        <a class="collapse-item" href="" style="color: #fff">Laporan</a>
+                    </div>
+                </div>
+        </li>
     
-            <!-- Divider -->
-            <hr class="text-white" />
-    
-            <!-- Menu Dashboard -->
-            <li class="nav-item">
-              <a class="nav-link" href="index.php">
-                <i class="fas fa-fw fa-chart-line"></i>
-                <span>Dashboard</span>
-              </a>
-            </li>
-    
-            <!-- Menu Obat -->
-            <li class="nav-item active">
-              <a class="nav-link" href="tables.php">
-                <i class="fas fa-fw fa-pills"></i>
-                <span>Obat</span>
-              </a>
-            </li>
-    
-            <!-- Menu Expired -->
-            <li class="nav-item">
-              <a class="nav-link" href="Expired.php">
-                <i class="fas fa-fw fa-calendar"></i>
-                <span>Expired</span>
-              </a>
-            </li>
-    
-            <!-- Menu Inbox -->
-            <li class="nav-item">
-              <a class="nav-link" href="inbox.php">
-                <i class="fas fa-fw fa-inbox"></i>
-                <span>Inbox</span>
-              </a>
-            </li>
-            <!--  -->
-    
-            <!-- Divider -->
-            <!-- <hr class="text-white" /> -->
-        </ul>
+        <!-- Menu Expired -->
+        <li class="nav-item">
+            <a class="nav-link" href="Expired.php">
+            <i class="fas fa-fw fa-calendar"></i>
+            <span>Expired</span>
+            </a>
+        </li>
+
+        <!-- Menu Store -->
+        <li class="nav-item">
+          <a class="nav-link" href="store.php">
+            <i class="fas fa-fw fa-inbox"></i>
+            <span>Store</span>
+          </a>
+        </li>
+
+        <!-- Menu Inbox -->
+        <li class="nav-item">
+          <a class="nav-link" href="inbox.php">
+          <i class="fas fa-fw fa-inbox"></i>
+            <span>Inbox</span>
+          </a>
+        </li>
+        <!--  -->
+
+        <!-- Divider -->
+        <!-- <hr class="text-white" /> -->
+    </ul>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -159,7 +174,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                 // Menampilkan obat yang belum kadaluarsa
                                 while($row = mysqli_fetch_array($kadaluarsa)){?>
 
-                                    <a class="dropdown-item d-flex align-items-center" href="inbox.php">
+                                    <a class="dropdown-item d-flex align-items-center" href="inboxkaryawan.php">
                                         <div class="mr-3">
                                             <div class="icon-circle bg-warning">
                                                 <i class="fas fa-exclamation-triangle text-white"></i>
@@ -183,7 +198,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Manajer1</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Karyawan</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -209,26 +224,28 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                     <!-- Page Heading -->
                     <!-- <h1 class="h3 mb-2 text-gray-800">Data Obat</h1> -->
 
-                    <!-- DataTales Example -->
+                    <!-- DataTables Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Obat</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Apotek</h6>
                         </div>
                         <div class="card-body">
+                          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambah">
+                            Tambah Toko
+                          </button>
+    
                             <div class="table-responsive">
+                                <br>
                                 <div class="container">
+                                
                                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
                                                 <!-- <th>Kode Obat</th> -->
                                                 <th>Nama</th>
-                                                <th>Kode Produksi</th>
-                                                <th>Produsen</th>
-                                                <th>Tanggal Kadaluarsa</th>
-                                                <th>Stok Obat</th>
-                                                <th>Harga</th>
-                                                <th>Penyimpanan</th>
+                                                <th>Status</th>
+                                                <th>Alamat Apotek</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -240,23 +257,21 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                             $obat = mysqli_query($koneksi, "SELECT * FROM obat WHERE kadaluarsa > CURRENT_DATE() Order by id_obat desc;");
 
                                             // Menampilkan obat yang belum kadaluarsa
-                                            while($row = mysqli_fetch_array($obat)){?>
+                                            // while($row = mysqli_fetch_array($obat)){?>
                                                 <tr>
-                                                    <td><?php echo $no++ ; ?>.</td>
-                                                    <!-- <td><?php echo $row["ID_Obat"]; ?></td> -->
-                                                    <td><?php echo $row["Nama_Obat"]; ?></td>
-                                                    <td><?php echo $row["kode_produksi"]; ?></td>
-                                                    <td><?php echo $row["produsen"]; ?></td>
-                                                    <td><?php echo $row["kadaluarsa"]; ?></td>
-                                                    <td><?php echo $row["Stok"]; ?></td>
-                                                    <td><?php echo $row["Harga_Satuan"]; ?></td>
-                                                    <td><?php echo "Ruangan " . $row["penyimpanan"]; ?></td>
+                                                    <td>1.</td>
+                                                    <td>apotiiiik</td>
+                                                    <td>status</td>
+                                                    <td>alamat</td>
+                                                    <!-- td tabel store -->
                                                     <td>
                                                         <!-- Button trigger modal -->
-                                                        <div class="btn-group" role="group">
-                                                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalUbah<?=$row["ID_Obat"] ?>">Edit</button>
-                                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalHapus<?=$row["ID_Obat"] ?>" style="margin-left: 10px;">Hapus</button>
-                                                        </div>
+                                                        <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalUbah<?=$row["ID_Obat"] ?>">
+                                                        Edit
+                                                        </button>      
+                                                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalRestok<?=$row["ID_Obat"] ?>">
+                                                            Hapus
+                                                        </button>                                                  
                                                     </td>
                                                 </tr>
 
@@ -271,16 +286,12 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                                                 <input type="hidden" name="id" value = "<?=$row["ID_Obat"]?>">
                                                                 <div class="modal-body">
                                                                     <div class="mb-3">
-                                                                        <label class="form-label">Nama Obat</label>
+                                                                        <label class="form-label">Nama</label>
                                                                         <input type="text" class="form-control" name = "nama" value = "<?=$row["Nama_Obat"]?>">
                                                                     </div>
                                                                     <div class="mb-3">
-                                                                        <label class="form-label">Produsen</label>
+                                                                        <label class="form-label">Status</label>
                                                                         <input type="text" class="form-control" name="produsen" value = "<?=$row["produsen"]?>">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Harga</label>
-                                                                        <input type="text" class="form-control" name="harga" value = "<?=$row["Harga_Satuan"]?>">
                                                                     </div>
                                                                 </div>
                                                             
@@ -292,43 +303,61 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                                             </div>
                                                         </div>
                                                     </div>
+   
+                                            
+                                            <!-- Modal Hapus -->
+                                                    
 
-                                                    <!-- Modal Hapus -->
-                                                    <div class="modal fade" id="modalHapus<?=$row["ID_Obat"]?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <!-- Modal Tambah Obat -->
+                                                    <div class="modal fade" id="modalTambah" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <!-- <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Data</h1>                                                                 -->
+                                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Input toko</h1>                                                                
                                                             </div>
+                                                            
                                                             <form action="crud.php" method = "POST">
-                                                                <input type="hidden" name="id" value = "<?=$row["ID_Obat"]?>">
                                                                 <div class="modal-body">
-                                                                    <h5>Apakah anda yakin menghapus data <?= $row["Nama_Obat"]?> ?</h5>
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Nama</label>
+                                                                        <input type="text" class="form-control" name = "nama">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                <label for="">Status</label>
+                                                <select class="form-control" id="exampleFormControlSelect1">
+                                                  <option>Aktif</option>
+                                                  <option>Tidak Aktif</option>
+                                                </select>
+                                            </div>
+                                                                    <!-- <div class="mb-3">
+                                                                        <label class="form-label">Status</label>
+                                                                        <input type="text" class="form-control" name = "status_toko">
+                                                                    </div> -->
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Alamat</label>
+                                                                        <input type="text" class="form-control" name = "alamat_toko">
+                                                                    </div>                                                   
                                                                 </div>
                                                             
                                                                 <div class="modal-footer">
-                                                                    <button type="submit" class="btn btn-primary" name="hapus">Hapus</button>
+                                                                    <button type="submit" class="btn btn-success" name="simpan">Simpan</button>
                                                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Keluar</button>
                                                                 </div>
                                                             </form>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                            <?php
-                                            }
-                                            ?>                                        
+                                                    </div>                                            
                                         </tbody>
+                                        <!-- <?php
+                                            // }
+                                            ?> -->
                                         <tfoot>
                                             <tr>
                                                 <th>No.</th>    
                                                 <!-- <th>Kode Obat</th> -->
                                                 <th>Nama</th>
-                                                <th>Kode Produksi</th>
-                                                <th>Produsen</th>
-                                                <th>Tanggal Kadaluarsa</th>
-                                                <th>Stok Obat</th>
-                                                <th>Harga</th>
-                                                <th>Penyimpanan</th>
+                                                <th>Status</th>
+                                                <th>Alamat Apotek</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
