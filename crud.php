@@ -1,6 +1,26 @@
 <?php
 include "koneksi.php";
 
+// Untuk masuk pada halaman Login
+if(isset($_POST['login'])){
+    if($_POST['user']=="manajer"){
+        echo"<script>
+                alert('Selamat datang Manager');
+                document.location='index.php';
+            </script>";
+    }elseif($_POST['user']=="karyawan"){
+        echo"<script>
+                alert('Selamat datang Karyawan');
+                document.location='Paymentss.php';
+            </script>";
+    }else{
+        echo"<script>
+                alert('User tidak terdaftar');
+                document.location='login.php';
+            </script>";
+    }
+}
+
 // Tambah data ketika tombol simpan ditekan
 if(isset($_POST['simpan'])){
     $query = "INSERT INTO `obat`(`ID_Obat`, `Nama_Obat`, `Harga_Satuan`, `Stok`, `kode_produksi`, `kadaluarsa`, `produsen`, `penyimpanan`) 

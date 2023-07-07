@@ -271,7 +271,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                     </select>
                                 </div>                                                           
                                 <div class="mb-3">
-                                    <label for="dSelect" class="form-label">Apakah Mempunyai Riwayat Alergi?</label>
+                                    <label for="dSelect" class="form-label">Apakah Mempunyai Riwayat Penyakit?</label>
                                     <select id="Select" class="form-select" name="riwayat_penyakit">
                                         <?php
                                         foreach(nilai_kolom('riwayat_penyakit') as $keluhan){
@@ -421,7 +421,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="login.php">Logout</a>
                 </div>
             </div>
         </div>

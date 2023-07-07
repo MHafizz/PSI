@@ -243,8 +243,8 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                             <?php
                                             include 'koneksi.php';
                                             $no=1;        
-                                            $query ="SELECT DATEDIFF(kadaluarsa, CURRENT_DATE()) AS selisih_hari, Nama_Obat, kode_produksi, produsen, Stok, Harga_Satuan,penyimpanan 
-                                                    FROM obat WHERE kadaluarsa <= DATE_ADD(CURRENT_DATE(), INTERVAL 7 DAY);;";
+                                            $query ="SELECT DATEDIFF(kadaluarsa, CURRENT_DATE) AS selisih_hari, Nama_Obat, kode_produksi, produsen, Stok, Harga_Satuan,penyimpanan 
+                                                    FROM obat WHERE kadaluarsa <= DATE_ADD(CURRENT_DATE, INTERVAL 7 DAY);";
                                             $obat = mysqli_query($koneksi, $query);
 
                                             // Menampilkan obat yang belum kadaluarsa
@@ -325,7 +325,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="login.php">Logout</a>
                 </div>
             </div>
         </div>

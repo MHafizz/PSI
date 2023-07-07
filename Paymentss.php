@@ -257,7 +257,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                         <input type="number" id="paymentAmount" required />
                       </div>
                       <div class="payment-buttons">
-                        <button class="btn-success btn-sm" onclick="prosesPembayaran('cash')">Tunai</button>
+                        <button type ="submit "class="btn-success btn-sm" onclick="prosesPembayaran('cash')">Tunai</button>
                         <button class="btn-success btn-sm" onclick="prosesPembayaran('card')">Kartu Kredit</button>
                       </div>
                     </div>
@@ -302,7 +302,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="login.php">Logout</a>
           </div>
         </div>
       </div>
