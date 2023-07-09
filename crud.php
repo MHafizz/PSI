@@ -22,9 +22,9 @@ if(isset($_POST['login'])){
 }
 
 // Tambah data ketika tombol simpan ditekan
-if(isset($_POST['simpan'])){
-    $query = "INSERT INTO `obat`(`ID_Obat`, `Nama_Obat`, `Harga_Satuan`, `Stok`, `kode_produksi`, `kadaluarsa`, `produsen`, `penyimpanan`) 
-                VALUES ('NULL','$_POST[nama]','$_POST[harga]','$_POST[stok]','$_POST[kode_produksi]','$_POST[kadaluarsa]','$_POST[produsen]','$_POST[penyimpanan]')";
+if(isset($_POST['tambahObat'])){
+    $query = "INSERT INTO `obat`(`ID_Obat`, `Nama_Obat`, `Harga_Satuan`, `Stok`, `kode_produksi`, `kadaluarsa`, `produsen`, `penyimpanan`, `id_apotek`) 
+                VALUES ('NULL','$_POST[nama]','$_POST[harga]','$_POST[stok]','$_POST[kode]','$_POST[kadaluarsa]','$_POST[produsen]','$_POST[penyimpanan]', '$_POST[apotek]')";
     $result = mysqli_query($koneksi, $query);
 
     if($result){
@@ -67,6 +67,7 @@ if(isset($_POST['ubah'])){
     $query = "UPDATE obat SET 
                 Nama_Obat = '$_POST[nama]',
                 produsen = '$_POST[produsen]',
+                stok = '$_POST[stok]',
                 Harga_Satuan = '$_POST[harga]' WHERE Id_Obat = '$_POST[id]' ";
     $result = mysqli_query($koneksi, $query);
 

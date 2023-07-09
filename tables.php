@@ -263,6 +263,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                                 <th>Stok Obat</th>
                                                 <th>Harga</th>
                                                 <th>Penyimpanan</th>
+                                                <th>Apotek</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -270,21 +271,25 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                         <tbody>
                                             <?php
                                             include 'koneksi.php';
-                                            $no=1;                                            
-                                            $obat = mysqli_query($koneksi, "SELECT * FROM obat");
+                                            $no=1;    
+                                            $queryObat ="SELECT obat.ID_Obat, obat.Nama_Obat AS nama_obat, obat.kode_produksi, obat.produsen, obat.kadaluarsa, obat.stok, obat.harga_satuan, obat.penyimpanan, apotek.nama AS nama_apotek
+                                                    FROM obat
+                                                    JOIN apotek ON obat.id_apotek = apotek.id_apotek;";                                        
+                                            $obat = mysqli_query($koneksi, $queryObat);
 
                                             // Menampilkan obat yang belum kadaluarsa
                                             while($row = mysqli_fetch_array($obat)){?>
                                                 <tr>
                                                     <td><?php echo $no++ ; ?>.</td>
                                                     <!-- <td><?php echo $row["ID_Obat"]; ?></td> -->
-                                                    <td><?php echo $row["Nama_Obat"]; ?></td>
+                                                    <td><?php echo $row["nama_obat"]; ?></td>
                                                     <td><?php echo $row["kode_produksi"]; ?></td>
                                                     <td><?php echo $row["produsen"]; ?></td>
                                                     <td><?php echo $row["kadaluarsa"]; ?></td>
-                                                    <td><?php echo $row["Stok"]; ?></td>
-                                                    <td><?php echo $row["Harga_Satuan"]; ?></td>
+                                                    <td><?php echo $row["stok"]; ?></td>
+                                                    <td><?php echo $row["harga_satuan"]; ?></td>
                                                     <td><?php echo $row["penyimpanan"]; ?></td>
+                                                    <td><?php echo $row["nama_apotek"]; ?></td>
                                                     <td>
                                                         <!-- Button trigger modal -->
                                                         <div class="btn-group" role="group">
@@ -306,20 +311,24 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                                                 <div class="modal-body">
                                                                     <div class="mb-3">
                                                                         <label class="form-label">Nama Obat</label>
-                                                                        <input type="text" class="form-control" name = "nama" value = "<?=$row["Nama_Obat"]?>">
+                                                                        <input type="text" class="form-control" name = "nama" value = "<?=$row["nama_obat"]?>">
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label class="form-label">Produsen</label>
                                                                         <input type="text" class="form-control" name="produsen" value = "<?=$row["produsen"]?>">
                                                                     </div>
                                                                     <div class="mb-3">
+                                                                        <label class="form-label">Stok</label>
+                                                                        <input type="text" class="form-control" name="stok" value = "<?=$row["stok"]?>">
+                                                                    </div>
+                                                                    <div class="mb-3">
                                                                         <label class="form-label">Harga</label>
-                                                                        <input type="text" class="form-control" name="harga" value = "<?=$row["Harga_Satuan"]?>">
+                                                                        <input type="text" class="form-control" name="harga" value = "<?=$row["harga_satuan"]?>">
                                                                     </div>
                                                                 </div>
                                                             
                                                                 <div class="modal-footer">
-                                                                    <button type="submit" class="btn btn-success" name="ubah">Ubah</button>
+                                                                    <button type="submit" class="btn btn-success" name="ubah">Ubah dan Simpan</button>
                                                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Keluar</button>
                                                                 </div>
                                                             </form>
@@ -337,7 +346,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                                             <form action="crud.php" method = "POST">
                                                                 <input type="hidden" name="id" value = "<?=$row["ID_Obat"]?>">
                                                                 <div class="modal-body">
-                                                                    <h5>Apakah anda yakin menghapus data <?= $row["Nama_Obat"]?> ?</h5>
+                                                                    <h5>Apakah anda yakin menghapus data <b><?= $row["nama_obat"]?></b> ?</h5>
                                                                 </div>
                                                             
                                                                 <div class="modal-footer">
@@ -350,7 +359,67 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                                     </div>
                                             <?php
                                             }
-                                            ?>                                        
+                                            ?>  
+                                            <!-- Modal Tambah Toko Apotek -->
+                                            <div class="modal fade" id="modalTambah" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Input obat</h1>
+                                                            <button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close">x</button>                                                                
+                                                        </div>                                                
+                                                        <form action="crud.php" method = "POST">
+                                                            <div class="modal-body">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Nama</label>
+                                                                    <input type="text" class="form-control" name = "nama">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Kode Produksi</label>
+                                                                    <input type="text" class="form-control" name = "kode">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Produsen</label>
+                                                                    <input type="text" class="form-control" name = "produsen">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Tanggal Kadaluarsa</label>
+                                                                    <input type="date" class="form-control" name = "kadaluarsa">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Stok</label>
+                                                                    <input type="text" class="form-control" name = "stok">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Harga</label>
+                                                                    <input type="text" class="form-control" name = "harga">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Apotek</label>
+                                                                    <select class="form-control" name="apotek"> 
+                                                                        <?php
+                                                                        $querypilihan = "SELECT id_apotek, nama FROM apotek WHERE status = 'aktif';";
+                                                                        $hasilpilihan = mysqli_query($koneksi, $querypilihan);
+                                                                        while($rowpilihan=mysqli_fetch_array($hasilpilihan)){?>
+                                                                            <option value="<?= $rowpilihan['id_apotek'];?>"><?= $rowpilihan['nama']; ?></option>
+                                                                        <?php
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Penyimpanan</label>
+                                                                    <input type="text" class="form-control" name = "penyimpanan">
+                                                                </div>                                                   
+                                                            </div>                                                    
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-success" name="tambahObat">Tambah</button>
+                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Keluar</button>
+                                                            </div>
+                                                        </form>
+                                                        </div>
+                                                    </div>
+                                                </div>                                      
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -363,6 +432,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                                 <th>Stok Obat</th>
                                                 <th>Harga</th>
                                                 <th>Penyimpanan</th>
+                                                <th>Apotek</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
