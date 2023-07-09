@@ -1,10 +1,10 @@
 <?php
 
-include 'koneksi.php';    
+include 'koneksi.php';
 $query ="SELECT DATEDIFF(kadaluarsa, CURRENT_DATE()) AS selisih_hari, Nama_Obat, kode_produksi, produsen, Stok, Harga_Satuan,penyimpanan 
 FROM obat WHERE kadaluarsa <= DATE_ADD(CURRENT_DATE(), INTERVAL 7 DAY);;";
 $kadaluarsa = mysqli_query($koneksi, $query);
-                                  
+
 ?>
 
 <!DOCTYPE html>
@@ -61,17 +61,26 @@ $kadaluarsa = mysqli_query($koneksi, $query);
         <hr class="text-white" />
 
         <!-- Menu Dashboard -->
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="index.php">
             <i class="fas fa-fw fa-chart-line"></i>
             <span>Dashboard</span>
             </a>
         </li>
 
+        <!-- Menu Store -->
+        <li class="nav-item active">
+          <a class="nav-link" href="store.php">
+            <i class="fas fa-fw fa-store"></i>
+            <span>Store</span>
+          </a>
+        </li>
+
+        <!-- Menu Obat -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-pills"></i>
                     <span>Obat</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -91,14 +100,14 @@ $kadaluarsa = mysqli_query($koneksi, $query);
             </a>
         </li>
 
-        <!-- Menu Store -->
+        <!-- Menu Stok kosong -->
         <li class="nav-item">
-          <a class="nav-link" href="store.php">
-            <i class="fas fa-fw fa-inbox"></i>
-            <span>Store</span>
-          </a>
+            <a class="nav-link" href="lowStock.php">
+            <i class="fas fa-fw fa-map"></i>
+            <span>Low stock</span>
+            </a>
         </li>
-
+        
         <!-- Menu Inbox -->
         <li class="nav-item">
           <a class="nav-link" href="inbox.php">
@@ -172,9 +181,9 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                 </h6>
                                 <?php
                                 // Menampilkan obat yang belum kadaluarsa
-                                while($row = mysqli_fetch_array($kadaluarsa)){?>
+                                while($row = mysqli_fetch_array($kadaluarsa)) {?>
 
-                                    <a class="dropdown-item d-flex align-items-center" href="inboxkaryawan.php">
+                                    <a class="dropdown-item d-flex align-items-center" href="inbox.php">
                                         <div class="mr-3">
                                             <div class="icon-circle bg-warning">
                                                 <i class="fas fa-exclamation-triangle text-white"></i>
@@ -187,7 +196,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                     </a> 
                                 <?php
                                 }
-                                ?>                               
+?>                               
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div>
                         </li>
@@ -198,7 +207,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Karyawan</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Manajer1</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -221,19 +230,23 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <!-- <h1 class="h3 mb-2 text-gray-800">Data Obat</h1> -->
+                    <!-- Page Heading -->                    
+                    <section class="content-header">
+                        <h1>
+                        Kelola
+                        <small>Apotek</small>
+                        </h1>                        
+                    </section>
 
+                    <!-- Tombol tambah toko -->
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambah">
+                            Tambah Apotek
+                    </button>
+                                
                     <!-- DataTables Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Apotek</h6>
-                        </div>
-                        <div class="card-body">
-                          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambah">
-                            Tambah Toko
-                          </button>
-    
+                    <div class="card shadow mb-2 mt-3">                        
+                        <div class="card-body"> 
+                        <h6 class="m-0 font-weight-bold text-basic">Kelola Toko</h6>                             
                             <div class="table-responsive">
                                 <br>
                                 <div class="container">
@@ -252,105 +265,129 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                         <!-- Menampilkan nilai tabel  -->
                                         <tbody>
                                             <?php
-                                            include 'koneksi.php';
-                                            $no=1;                                            
-                                            $obat = mysqli_query($koneksi, "SELECT * FROM obat WHERE kadaluarsa > CURRENT_DATE() Order by id_obat desc;");
+                                                include 'koneksi.php';
+                                            $no=1;
+                                            $apotek = mysqli_query($koneksi, "SELECT * FROM apotek;");
 
                                             // Menampilkan obat yang belum kadaluarsa
-                                            // while($row = mysqli_fetch_array($obat)){?>
+                                            while($row = mysqli_fetch_array($apotek)) {?>
                                                 <tr>
-                                                    <td>1.</td>
-                                                    <td>apotiiiik</td>
-                                                    <td>status</td>
-                                                    <td>alamat</td>
+                                                    <td><?php echo $no++ ?>.</td>
+                                                    <td><?php echo $row['nama'] ?></td>                                                    
+                                                    <?php $status = $row['status'];
+                                                        $background_color = ($status == "Aktif") ? 'green' : 'red';
+                                                        $text_color = 'white'; // Warna teks
+
+                                                        echo '<td><mark style="background-color: '.$background_color.'; color: '.$text_color.'; border-radius: 3px; font-size: 12px;">'.$status.'</mark></td>'; ?>                                               
                                                     <!-- td tabel store -->
+                                                    <td><?php echo $row['alamat'] ?></td> 
                                                     <td>
                                                         <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalUbah<?=$row["ID_Obat"] ?>">
-                                                        Edit
+                                                        <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalUbah<?=$row["id_apotek"] ?>">
+                                                            Edit
                                                         </button>      
-                                                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalRestok<?=$row["ID_Obat"] ?>">
+                                                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalHapus<?=$row["id_apotek"] ?>">
                                                             Hapus
                                                         </button>                                                  
                                                     </td>
                                                 </tr>
-
-                                                    <!-- Modal Edit -->
-                                                    <div class="modal fade" id="modalUbah<?=$row["ID_Obat"]?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Data</h1>                                                                
+                                                <!-- Modal Edit Toko Apotek-->
+                                                <div class="modal fade" id="modalUbah<?=$row["id_apotek"]?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Data</h1>                                                                
                                                             </div>
-                                                            <form action="crud.php" method = "POST">
-                                                                <input type="hidden" name="id" value = "<?=$row["ID_Obat"]?>">
-                                                                <div class="modal-body">
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Nama</label>
-                                                                        <input type="text" class="form-control" name = "nama" value = "<?=$row["Nama_Obat"]?>">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Status</label>
-                                                                        <input type="text" class="form-control" name="produsen" value = "<?=$row["produsen"]?>">
-                                                                    </div>
+                                                        <form action="crud.php" method = "POST">
+                                                            <input type="hidden" name="id_apotek" value = "<?=$row["id_apotek"]?>">
+                                                            <div class="modal-body">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Nama</label>
+                                                                    <input type="text" class="form-control" name = "nama_apotek" value = "<?=$row["nama"]?>">
                                                                 </div>
-                                                            
-                                                                <div class="modal-footer">
-                                                                    <button type="submit" class="btn btn-success" name="ubah">Ubah</button>
-                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Keluar</button>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Status</label>
+                                                                    <select class="form-control" name="status">
+                                                                        <option value="Aktif">Aktif</option>
+                                                                        <option value="Tidak aktif">Tidak Aktif</option>
+                                                                    </select>
                                                                 </div>
-                                                            </form>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Alamat</label>
+                                                                    <input type="text" class="form-control" name = "alamat" value = "<?=$row["alamat"]?>">
+                                                                </div>
+                                                            </div>                                                
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-success" name="edit_apotek">Ubah dan Simpan</button>
+                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Keluar</button>
                                                             </div>
+                                                        </form>
                                                         </div>
                                                     </div>
-   
-                                            
-                                            <!-- Modal Hapus -->
-                                                    
+                                                </div>        
 
-                                            <!-- Modal Tambah Obat -->
-                                                    <div class="modal fade" id="modalTambah" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
+                                                <!-- Modal Hapus Toko Apotek -->
+                                                <div class="modal fade" id="modalHapus<?=$row["id_apotek"]?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
                                                             <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Input toko</h1>                                                                
-                                                            </div>
-                                                            
-                                                            <form action="crud.php" method = "POST">
-                                                                <div class="modal-body">
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Nama</label>
-                                                                        <input type="text" class="form-control" name = "nama">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                <label for="">Status</label>
-                                                <select class="form-control" id="exampleFormControlSelect1">
-                                                  <option>Aktif</option>
-                                                  <option>Tidak Aktif</option>
-                                                </select>
-                                            </div>
-                                                                    <!-- <div class="mb-3">
-                                                                        <label class="form-label">Status</label>
-                                                                        <input type="text" class="form-control" name = "status_toko">
-                                                                    </div> -->
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Alamat</label>
-                                                                        <input type="text" class="form-control" name = "alamat_toko">
-                                                                    </div>                                                   
-                                                                </div>
-                                                            
-                                                                <div class="modal-footer">
-                                                                    <button type="submit" class="btn btn-success" name="simpan">Simpan</button>
-                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Keluar</button>
-                                                                </div>
-                                                            </form>
-                                                            </div>
+                                                        <div class="modal-header">
+                                                            <!-- <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Data</h1> -->
                                                         </div>
-                                                    </div>                                            
+                                                        <form action="crud.php" method = "POST">
+                                                            <input type="hidden" name="id" value = "<?=$row["id_apotek"]?>">
+                                                            <div class="modal-body">
+                                                                <h5>Apakah anda yakin menghapus data <?= $row["nama"]?> ?</h5>
+                                                            </div>
+                                                        
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary" name="hapustoko">Hapus</button>
+                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Keluar</button>
+                                                            </div>
+                                                        </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                            
+                                                <!-- Modal Tambah Toko Apotek -->
+                                                <div class="modal fade" id="modalTambah" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Input toko</h1>                                                                
+                                                        </div>                                                
+                                                        <form action="crud.php" method = "POST">
+                                                            <div class="modal-body">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Nama</label>
+                                                                    <input type="text" class="form-control" name = "nama">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Status</label>
+                                                                    <select class="form-control" name="status">
+                                                                        <option value="Aktif">Aktif</option>
+                                                                        <option value="Tidak aktif">Tidak Aktif</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Alamat</label>
+                                                                    <input type="text" class="form-control" name = "alamat_toko">
+                                                                </div>                                                   
+                                                            </div>                                                    
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-success" name="tambahToko">Tambah</button>
+                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Keluar</button>
+                                                            </div>
+                                                        </form>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            <?php
+                                            }
+                                            ?>
+                                                                                               
                                         </tbody>
-                                        <!-- <?php
-                                            // }
-                                            ?> -->
+                                        
+
                                         <tfoot>
                                             <tr>
                                                 <th>No.</th>    

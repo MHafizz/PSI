@@ -105,6 +105,68 @@ if(isset($_POST['hapus'])){
     }
 }
 
+// Mengedit data toko apotek ketika tombol edit ditekan
+if(isset($_POST['edit_apotek'])){
+    $query = "UPDATE apotek SET 
+                nama = '$_POST[nama_apotek]', alamat = '$_POST[alamat]',
+                status = '$_POST[status]' WHERE id_apotek = '$_POST[id_apotek]' ";
+    $result = mysqli_query($koneksi, $query);
+
+    if($result){
+        echo"<script>
+                alert('Edit Data Sukses');
+                document.location='store.php';
+            </script>";
+    } else {
+        echo "
+        <script>
+            alert('Edit Data Gagal');
+            document.location='store.php';
+        </script>
+        ";
+    }
+}
+
+// Menghapus data toko apotek ketika tombol edit ditekan
+if(isset($_POST['hapustoko'])){
+    $query = "DELETE FROM apotek WHERE id_apotek = '$_POST[id]' ";
+    $result = mysqli_query($koneksi, $query);
+
+    if($result){
+        echo"<script>
+                alert('Hapus Data Sukses');
+                document.location='store.php';
+            </script>";
+    } else {
+        echo "
+        <script>
+            alert('Hapus Data Gagal');
+            document.location='store.php';
+        </script>
+        ";
+    }
+}
+
+// Tambah data ketika tombol simpan ditekan
+if(isset($_POST['tambahToko'])){
+    $query = "INSERT INTO `apotek`(`id_apotek`, `nama`, `status`, `alamat`) 
+                VALUES ('NULL','$_POST[nama]','$_POST[status]','$_POST[alamat_toko]')";
+    $result = mysqli_query($koneksi, $query);
+
+    if($result){
+        echo"<script>
+                alert('Tambah Data Sukses');
+                document.location='store.php';
+            </script>";
+    } else {
+        echo "
+        <script>
+            alert('Tambah Data Gagal');
+            document.location='store.php';
+        </script>
+        ";
+    }
+}
 
 
 ?>

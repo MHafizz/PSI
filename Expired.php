@@ -51,49 +51,73 @@ $kadaluarsa = mysqli_query($koneksi, $query);
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-              <div class="sidebar-brand-icon rotate-n-15">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+            <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
-              </div>
-              <div class="sidebar-brand-text mx-3">DIRECTION</div>
+            </div>
+            <div class="sidebar-brand-text mx-3">DIRECTION</div>
             </a>
-    
+
             <!-- Divider -->
             <hr class="text-white" />
-    
+
             <!-- Menu Dashboard -->
             <li class="nav-item">
-              <a class="nav-link" href="index.php">
+                <a class="nav-link" href="index.php">
                 <i class="fas fa-fw fa-chart-line"></i>
                 <span>Dashboard</span>
-              </a>
+                </a>
             </li>
-    
+
+            <!-- Menu Store -->
+            <li class="nav-item">
+            <a class="nav-link" href="store.php">
+                <i class="fas fa-fw fa-store"></i>
+                <span>Store</span>
+            </a>
+            </li>
+
             <!-- Menu Obat -->
             <li class="nav-item">
-              <a class="nav-link" href="tables.php">
-                <i class="fas fa-fw fa-pills"></i>
-                <span>Obat</span>
-              </a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-pills"></i>
+                        <span>Obat</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class=" py-2 collapse-inner rounded">
+                            <h6 class="collapse-header" style="color: #fff">data table:</h6>
+                            <a class="collapse-item" href="tables.php" style="color: #fff">Tabel Obat</a>
+                            <a class="collapse-item" href="" style="color: #fff">Laporan</a>
+                        </div>
+                    </div>
             </li>
-    
+        
             <!-- Menu Expired -->
             <li class="nav-item active">
-              <a class="nav-link" href="Expired.php">
+                <a class="nav-link" href="Expired.php">
                 <i class="fas fa-fw fa-calendar"></i>
                 <span>Expired</span>
-              </a>
+                </a>
             </li>
-    
+
+            <!-- Menu Stok kosong -->
+            <li class="nav-item">
+                <a class="nav-link" href="lowStock.php">
+                <i class="fas fa-fw fa-map"></i>
+                <span>Low stock</span>
+                </a>
+            </li>
+            
             <!-- Menu Inbox -->
             <li class="nav-item">
-              <a class="nav-link" href="inbox.php">
-                <i class="fas fa-fw fa-inbox"></i>
+            <a class="nav-link" href="inbox.php">
+            <i class="fas fa-fw fa-inbox"></i>
                 <span>Inbox</span>
-              </a>
+            </a>
             </li>
             <!--  -->
-    
+
             <!-- Divider -->
             <!-- <hr class="text-white" /> -->
         </ul>
@@ -220,7 +244,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Expired</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Obat Kadaluarsa</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -258,7 +282,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                                     <td><?php echo $row["selisih_hari"]; ?> Hari</td>
                                                     <td><?php echo $row["Stok"]; ?></td>
                                                     <td><?php echo $row["Harga_Satuan"]; ?></td>
-                                                    <td><?php echo "Ruangan " . $row["penyimpanan"]; ?></td>
+                                                    <td><?php echo $row["penyimpanan"]; ?></td>
                                                     <td> - </td>
                                                 </tr>                                                
                                             <?php

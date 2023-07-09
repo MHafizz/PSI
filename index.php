@@ -34,48 +34,73 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-              <div class="sidebar-brand-icon rotate-n-15">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+            <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
-              </div>
-              <div class="sidebar-brand-text mx-3">DIRECTION</div>
+            </div>
+            <div class="sidebar-brand-text mx-3">DIRECTION</div>
             </a>
-    
+
             <!-- Divider -->
             <hr class="text-white" />
-    
+
+            <!-- Menu Dashboard -->
             <li class="nav-item active">
-              <a class="nav-link" href="index.php">
+                <a class="nav-link" href="index.php">
                 <i class="fas fa-fw fa-chart-line"></i>
                 <span>Dashboard</span>
-              </a>
+                </a>
             </li>
-    
+
+            <!-- Menu Store -->
+            <li class="nav-item">
+            <a class="nav-link" href="store.php">
+                <i class="fas fa-fw fa-store"></i>
+                <span>Store</span>
+            </a>
+            </li>
+
             <!-- Menu Obat -->
             <li class="nav-item">
-              <a class="nav-link" href="tables.php">
-                <i class="fas fa-fw fa-pills"></i>
-                <span>Obat</span>
-              </a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-pills"></i>
+                        <span>Obat</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class=" py-2 collapse-inner rounded">
+                            <h6 class="collapse-header" style="color: #fff">data table:</h6>
+                            <a class="collapse-item" href="tables.php" style="color: #fff">Tabel Obat</a>
+                            <a class="collapse-item" href="" style="color: #fff">Laporan</a>
+                        </div>
+                    </div>
             </li>
-    
+        
             <!-- Menu Expired -->
             <li class="nav-item">
-              <a class="nav-link" href="Expired.php">
+                <a class="nav-link" href="Expired.php">
                 <i class="fas fa-fw fa-calendar"></i>
                 <span>Expired</span>
-              </a>
+                </a>
             </li>
-    
+
+            <!-- Menu Stok kosong -->
+            <li class="nav-item">
+                <a class="nav-link" href="lowStock.php">
+                <i class="fas fa-fw fa-map"></i>
+                <span>Low stock</span>
+                </a>
+            </li>
+            
             <!-- Menu Inbox -->
             <li class="nav-item">
-              <a class="nav-link" href="inbox.php">
-                <i class="fas fa-fw fa-inbox"></i>
+            <a class="nav-link" href="inbox.php">
+            <i class="fas fa-fw fa-inbox"></i>
                 <span>Inbox</span>
-              </a>
+            </a>
             </li>
             <!--  -->
-    
+
             <!-- Divider -->
             <!-- <hr class="text-white" /> -->
         </ul>
@@ -197,78 +222,88 @@
                     <!-- Content Row -->
                     <div class="row">
 
-                        <!-- Earnings (Monthly) Card Example -->
+                        <!-- Total Stok Obat -->
                         <div class="col-xl-4 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="font-size: 20px; color: #B3C99C;">
-                                                Pendapatan Hari ini
-                                            </div>
+                                            
                                             <?php 
                                             
-                                                include "koneksi.php";
-                                                // pendapatan harian
-                                                $queryharian = "SELECT SUM(Total_Harga) AS total_penghasilan FROM transaksi WHERE Tanggal_Transaksi = CURRENT_DATE();";
-                                                $hasilharian = mysqli_query($koneksi, $queryharian);
-                                                $rowharian = mysqli_fetch_row($hasilharian);
+                                            include "koneksi.php";
+                                            // Total Stok
+                                            $querystok = "SELECT SUM(stok) AS total_stok FROM obat WHERE kadaluarsa > CURDATE();";
+                                            $hasilstok = mysqli_query($koneksi, $querystok);
+                                            $stok = mysqli_fetch_row($hasilstok);
 
-                                                // pendapatan bulan
-                                                $querybulan = "SELECT SUM(Total_Harga) AS total_penghasilan FROM transaksi
-                                                WHERE MONTH(Tanggal_Transaksi) = MONTH(CURRENT_DATE()) AND YEAR(Tanggal_Transaksi) = YEAR(CURRENT_DATE());";
-                                                $hasilbulan = mysqli_query($koneksi, $querybulan);
-                                                $rowbulan = mysqli_fetch_row($hasilbulan);
+                                            // Total jumlah Apotek cabang
+                                            $queryapotek = "SELECT COUNT(id_apotek) AS apotek FROM apotek";
+                                            $hasilapotek = mysqli_query($koneksi, $queryapotek);
+                                            $apotek = mysqli_fetch_row($hasilapotek);
 
-                                                // pendapatan tahun
-                                                $querytahun = "SELECT SUM(Total_Harga) AS total_penghasilan FROM transaksi
-                                                WHERE YEAR(Tanggal_Transaksi) = YEAR(CURRENT_DATE());";
-                                                $hasiltahun = mysqli_query($koneksi, $querytahun);
-                                                $rowttahun = mysqli_fetch_row($hasiltahun);
+                                            // Total Obat Terjual
+                                            $queryjumlah = "SELECT SUM(jumlah_obat) AS total FROM detail_transaksi";
+                                            $hasiljumlah = mysqli_query($koneksi, $queryjumlah);
+                                            $jumlah = mysqli_fetch_row($hasiljumlah);
 
                                             ?>
-                                            <div class="h5 mb-0 font-weight-bold" style="color: #617A55;">Rp<?php echo number_format($rowharian[0], 0, ',', '.');  ?></div>
+                                            <div class="h5 mb-0 font-weight-bold mb-3" style="color: #617A55;"><?php echo $stok[0];  ?></div>
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="font-size: 15px; color: #B3C99C;">
+                                                Total Stok Obat
+                                            </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-money-bill fa-2x " style="color: #B3C99C;"></i>
-                                        </div>
-                                    </div>
+                                            <i class="fas fa-pills fa-2x " style="color: #B3C99C;"></i>
+                                        </div>                                        
+                                    </div>                                                                        
+                                </div>
+                                <div class="text-center">
+                                    <a href="tables.php" class="small-box-footer">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
+                        <!-- Total Apotek -->
                         <div class="col-xl-4 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="font-size: 20px; color: #B3C99C;">
-                                                Pendapatan Bulan Ini</div>
-                                            <div class="h5 mb-0 font-weight-bold" style="color: #617A55;">Rp<?php echo number_format($rowbulan[0], 0, ',', '.'); ?></div>
+                                        <div class="h5 mb-0 font-weight-bold mb-3" style="color: #617A55;"><?php echo $apotek[0];  ?></div>
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="font-size: 15px; color: #B3C99C;">
+                                                Total Apotek
+                                            </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-money-bill-wave fa-2x" style="color: #B3C99C;"></i>
+                                            <i class="fas fa-clinic-medical fa-2x" style="color: #B3C99C;"></i>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="text-center">
+                                    <a href="store.php" class="small-box-footer">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Pendapatan Tahun Ini -->
+                        <!-- Total Obat Terjual -->
                         <div class="col-xl-4 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="font-size: 20px; color: #B3C99C;">
-                                                Pendapatan Tahun Ini</div>
-                                            <div class="h5 mb-0 font-weight-bold" style="color: #617A55;">Rp<?php echo number_format($rowttahun[0], 0, ',', '.'); ?></div>
+                                        <div class="h5 mb-0 font-weight-bold mb-3" style="color: #617A55;"><?php echo $jumlah[0];  ?></div>
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="font-size: 15px; color: #B3C99C;">
+                                                Total Obat Terjual
+                                            </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-money-check-alt fa-2x" style="color: #B3C99C;"></i>
+                                            <i class="fas fa-book-medical fa-2x" style="color: #B3C99C;"></i>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="text-center">
+                                    <a href="" class="small-box-footer">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -284,7 +319,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold" style="color: #617A55;">Pendapatan Tahun ini (Rupiah)</h6>
+                                    <h6 class="m-0 font-weight-bold" style="color: #617A55;">Obat yang Terjual</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body ">
@@ -294,14 +329,14 @@
                                         <?php
                                         // Mengambil data dari database atau sumber data lainnya
                                         include "koneksi.php";
-                                        $query = "SELECT monthname(Tanggal_Transaksi) ,SUM(Total_Harga) FROM `transaksi`GROUP BY monthname(Tanggal_Transaksi) ORDER BY month(Tanggal_Transaksi) ;";
+                                        $query = "SELECT DATE_FORMAT(tanggal, '%Y-%m') AS bulan, SUM(jumlah_obat) AS total_penjualan FROM detail_transaksi JOIN transaksi ON detail_transaksi.id_transaksi = transaksi.id_transaksi GROUP BY DATE_FORMAT(tanggal, '%Y-%m');";
                                         $result = mysqli_query($koneksi, $query);
 
                                         $data = array();
 
                                         // Loop melalui hasil query dan simpan data ke dalam array
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            $data[$row['monthname(Tanggal_Transaksi)']] = $row['SUM(Total_Harga)'];
+                                            $data[$row['bulan']] = $row['total_penjualan'];
                                         }
 
                                         // Konversi data menjadi format yang dapat digunakan oleh Chart.js
@@ -317,7 +352,7 @@
                                             data: {
                                                 labels: <?php echo $labels; ?>,
                                                 datasets: [{
-                                                    label: 'Pendapatan',
+                                                    label: 'Jumlah',
                                                     data: <?php echo $values; ?>,
                                                     backgroundColor: 'rgba(0, 123, 255, 0.6)'
                                                 }]
@@ -341,24 +376,28 @@
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">                                    
-                                    <h6>Stok Obat</h6>                                    
+                                <h6 class="m-0 font-weight-bold" style="color: #617A55;">Ditribusi Stok Obat</h6>                                   
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-pie pt-xl-1">
-                                    <canvas id="PieChart" width="800" height="400"></canvas>
+                                    <div class="chart-chart-pie-container">
+                                    <canvas id="PieChart" width="400" height="400"></canvas>
 
                                         <?php
                                         // Buat koneksi ke database
                                         
-                                        $query = "SELECT Nama_Obat, Stok FROM `obat`;";
+                                        $query = "SELECT apotek.id_apotek, apotek.nama AS nama_apotek, SUM(obat.stok) AS jumlah_stok
+                                        FROM obat
+                                        JOIN apotek ON obat.id_apotek = apotek.id_apotek
+                                        GROUP BY apotek.id_apotek, apotek.nama;
+                                        ";
                                         $result = mysqli_query($koneksi, $query);
 
                                         $data = array();
 
                                         // Loop melalui hasil query dan simpan data ke dalam array
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            $data[$row['Nama_Obat']] = $row['Stok'];
+                                            $data[$row['nama_apotek']] = $row['jumlah_stok'];
                                         }
 
                                         // Konversi data menjadi format yang dapat digunakan oleh Chart.js
@@ -385,15 +424,25 @@
                                                 }]
                                             },
                                             options: {
-                                                responsive: true,
+                                                responsive: false,
                                                 plugins: {
                                                     legend: {
-                                                        position: 'left', // Menempatkan legenda di sebelah kiri grafik
+                                                        position: 'bottom', // Menempatkan legenda di sebelah kiri grafik
+                                                        maxWidth: 150
                                                     }
                                                 }
                                             }
                                         });
                                         </script>
+                                        <!-- Styling piechart -->
+                                        <style>
+                                        .chart-pie-container {
+                                            /* display: flex; */
+                                            justify-content: center;
+                                            align-items: center;
+                                            /* height: 300px; Sesuaikan dengan tinggi yang diinginkan */
+                                        }
+                                        </style>
                                     </div>                                    
                                 </div>
                             </div>

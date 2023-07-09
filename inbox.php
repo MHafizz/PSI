@@ -43,52 +43,76 @@ $kadaluarsa = mysqli_query($koneksi, $query);
     <div id="wrapper">
       <!-- Sidebar -->
       <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
-        <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-          <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
-          </div>
-          <div class="sidebar-brand-text mx-3">DIRECTION</div>
-        </a>
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">DIRECTION</div>
+            </a>
 
-        <!-- Divider -->
-        <hr class="text-white" />
+            <!-- Divider -->
+            <hr class="text-white" />
 
-        <!-- Menu Dashboard -->
-        <li class="nav-item">
-          <a class="nav-link" href="index.php">
-            <i class="fas fa-fw fa-chart-line"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
+            <!-- Menu Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="index.php">
+                <i class="fas fa-fw fa-chart-line"></i>
+                <span>Dashboard</span>
+                </a>
+            </li>
 
-        <!-- Menu Obat -->
-        <li class="nav-item">
-          <a class="nav-link" href="tables.php">
-            <i class="fas fa-fw fa-pills"></i>
-            <span>Obat</span>
-          </a>
-        </li>
+            <!-- Menu Store -->
+            <li class="nav-item">
+            <a class="nav-link" href="store.php">
+                <i class="fas fa-fw fa-store"></i>
+                <span>Store</span>
+            </a>
+            </li>
 
-        <!-- Menu Expired -->
-        <li class="nav-item">
-          <a class="nav-link" href="Expired.php">
-            <i class="fas fa-fw fa-calendar"></i>
-            <span>Expired</span>
-          </a>
-        </li>
+            <!-- Menu Obat -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-pills"></i>
+                        <span>Obat</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class=" py-2 collapse-inner rounded">
+                            <h6 class="collapse-header" style="color: #fff">data table:</h6>
+                            <a class="collapse-item" href="tables.php" style="color: #fff">Tabel Obat</a>
+                            <a class="collapse-item" href="" style="color: #fff">Laporan</a>
+                        </div>
+                    </div>
+            </li>
+        
+            <!-- Menu Expired -->
+            <li class="nav-item">
+                <a class="nav-link" href="Expired.php">
+                <i class="fas fa-fw fa-calendar"></i>
+                <span>Expired</span>
+                </a>
+            </li>
 
-        <!-- Menu Inbox -->
-        <li class="nav-item active">
-          <a class="nav-link" href="inbox.php">
+            <!-- Menu Stok kosong -->
+            <li class="nav-item">
+                <a class="nav-link" href="lowStock.php">
+                <i class="fas fa-fw fa-map"></i>
+                <span>Low stock</span>
+                </a>
+            </li>
+            
+            <!-- Menu Inbox -->
+            <li class="nav-item active">
+            <a class="nav-link" href="inbox.php">
             <i class="fas fa-fw fa-inbox"></i>
-            <span>Inbox</span>
-          </a>
-        </li>
-        <!--  -->
+                <span>Inbox</span>
+            </a>
+            </li>
+            <!--  -->
 
-        <!-- Divider -->
-        <!-- <hr class="text-white" /> -->
+            <!-- Divider -->
+            <!-- <hr class="text-white" /> -->
       </ul>
       <!-- End of Sidebar -->
 
