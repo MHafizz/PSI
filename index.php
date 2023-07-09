@@ -259,7 +259,7 @@
                                     </div>                                                                        
                                 </div>
                                 <div class="text-center">
-                                    <a href="tables.php" class="small-box-footer">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
+                                <a href="laporanObat.php" class="small-box-footer" style="color: #617A55;">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -281,7 +281,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <a href="store.php" class="small-box-footer">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
+                                <a href="laporanObat.php" class="small-box-footer" style="color: #617A55;">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -303,7 +303,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <a href="laporanObat.php" class="small-box-footer">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a href="laporanObat.php" class="small-box-footer" style="color: #617A55;">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>

@@ -337,7 +337,7 @@
                     <div class="row">
 
                         <!-- Area Chart -->
-                        <div class="col-xl-7 col-lg-7">
+                        <div class="col-xl-7 col-lg-5">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div
@@ -346,8 +346,14 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body ">
-                                    <div class="chart-area" style="position: relative; height: 400px; width: 100%;">
-                                    <canvas id="myChart" width="100%" ></canvas>
+                                    <div class="chart-area">
+                                    <?php
+                                    if (isset($_POST['pilih_apotek'])) {
+                                    ?>
+                                        <canvas id="myChart" width="100%"></canvas>
+                                    <?php
+                                    }
+                                    ?>
 
                                         <?php
                                         // Mengambil data dari database atau sumber data lainnya
@@ -404,8 +410,14 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-chart-pie-container">
-                                    <canvas id="PieChart" width="350" height="350"></canvas>
-
+                                    <?php
+                                    if (isset($_POST['pilih_apotek'])) {
+                                    ?>
+                                        <canvas id="PieChart" width="350" height="350"></canvas>
+                                    <?php
+                                    }
+                                    ?>
+                                    
                                         <?php
                                         // Buat koneksi ke database
                                         
