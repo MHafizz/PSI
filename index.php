@@ -259,7 +259,7 @@
                                     </div>                                                                        
                                 </div>
                                 <div class="text-center">
-                                <a href="laporanObat.php" class="small-box-footer" style="color: #617A55;">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
+                                <a href="tables.php" class="small-box-footer" style="color: #617A55;">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -281,7 +281,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                <a href="laporanObat.php" class="small-box-footer" style="color: #617A55;">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
+                                <a href="store.php" class="small-box-footer" style="color: #617A55;">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -376,7 +376,7 @@
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">                                    
-                                <h6 class="m-0 font-weight-bold" style="color: #617A55;">Ditribusi Stok Obat</h6>                                   
+                                <h6 class="m-0 font-weight-bold" style="color: #617A55;">Distribusi Stok Obat</h6>                                   
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">

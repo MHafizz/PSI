@@ -326,9 +326,7 @@
                                     </div>
                                 </div>
                             </div>
-                        <?php
-                        }
-                        ?>
+                        
                     </div>
 
 
@@ -405,7 +403,7 @@
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">                                    
-                                <h6 class="m-0 font-weight-bold" style="color: #617A55;">Ditribusi Stok Obat</h6>                                   
+                                <h6 class="m-0 font-weight-bold" style="color: #617A55;">Obat yang Dijual</h6>                                   
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -421,8 +419,8 @@
                                         <?php
                                         // Buat koneksi ke database
                                         
-                                        $query = "SELECT nama_obat AS nama, SUM(obat.stok) AS jumlah_stok
-                                        FROM obat;";
+                                        $query = "SELECT nama_obat AS nama, stok AS jumlah_stok
+                                        FROM obat WHERE id_apotek=$id_apotek;";
                                         $result = mysqli_query($koneksi, $query);
 
                                         $data = array();
@@ -480,6 +478,9 @@
                             </div>
                         </div>                        
                     </div>
+                    <?php
+                        }
+                        ?>
                                 
                 <!-- /.container-fluid -->
 
