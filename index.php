@@ -381,7 +381,7 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-chart-pie-container">
-                                    <canvas id="PieChart" width="400" height="400"></canvas>
+                                    <canvas id="PieChart" width="350" height="350"></canvas>
 
                                         <?php
                                         // Buat koneksi ke database
