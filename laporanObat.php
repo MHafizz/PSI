@@ -45,7 +45,7 @@
             <hr class="text-white" />
 
             <!-- Menu Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="index.php">
                 <i class="fas fa-fw fa-chart-line"></i>
                 <span>Dashboard</span>
@@ -61,7 +61,7 @@
             </li>
 
             <!-- Menu Obat -->
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fas fa-fw fa-pills"></i>
@@ -216,7 +216,31 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Laporan</h1>
+                    </div>
+
+                    <!-- Pilih apotek -->
+                    <div class="">
+                        <form action="">                    
+                                <div class="form-group row">
+                                    <label for="status" class="col-sm-1 col-form-label">Apotek</label>
+                                    <div class="col-sm-7">
+                                        <select class="form-control" id="status" name="pilihan_apotek">
+                                        <?php
+                                            include "koneksi.php";
+                                            $querypilihan = "SELECT id_apotek, nama FROM apotek";
+                                            $hasilpilihan = mysqli_query($koneksi, $querypilihan);
+                                            while($rowpilihan=mysqli_fetch_array($hasilpilihan)){?>
+                                            <option value="<?= $rowpilihan['id_apotek'];?>"><?= $rowpilihan['nama']; ?></option>
+                                        <?php
+                                            }
+                                        ?>                                            
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-success" name="pilih_apotek">Pilih</button>
+                                </div>
+                                
+                        </form>
                     </div>
 
                     <!-- Content Row -->
@@ -231,19 +255,24 @@
                                             
                                             <?php 
                                             
-                                            include "koneksi.php";
+                                            include "koneksi.php"; 
+                                            $id_apotek='1'                                           ;
+                                            if (isset($_POST['pilih_apotek'])) {
+                                                $id_apotek = $_POST['pilihan_apotek'];
+                                                return $id_apotek;
+                                            }
                                             // Total Stok
-                                            $querystok = "SELECT SUM(stok) AS total_stok FROM obat WHERE kadaluarsa > CURDATE();";
+                                            $querystok = "SELECT SUM(stok) AS total_stok FROM obat WHERE kadaluarsa > CURDATE() and id_apotek = $id_apotek;";
                                             $hasilstok = mysqli_query($koneksi, $querystok);
                                             $stok = mysqli_fetch_row($hasilstok);
 
-                                            // Total jumlah Apotek cabang
-                                            $queryapotek = "SELECT COUNT(id_apotek) AS apotek FROM apotek";
+                                            // Total kategori obat Apotek cabang
+                                            $queryapotek = "SELECT COUNT(DISTINCT Nama_Obat) as kategori FROM `obat` WHERE id_apotek = $id_apotek;";
                                             $hasilapotek = mysqli_query($koneksi, $queryapotek);
                                             $apotek = mysqli_fetch_row($hasilapotek);
 
                                             // Total Obat Terjual
-                                            $queryjumlah = "SELECT SUM(jumlah_obat) AS total FROM detail_transaksi";
+                                            $queryjumlah = "SELECT SUM(jumlah_obat) AS total FROM detail_transaksi WHERE id_apotek = $id_apotek";
                                             $hasiljumlah = mysqli_query($koneksi, $queryjumlah);
                                             $jumlah = mysqli_fetch_row($hasiljumlah);
 
@@ -257,10 +286,7 @@
                                             <i class="fas fa-pills fa-2x " style="color: #B3C99C;"></i>
                                         </div>                                        
                                     </div>                                                                        
-                                </div>
-                                <div class="text-center">
-                                    <a href="tables.php" class="small-box-footer">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
+                                </div>                                
                             </div>
                         </div>
 
@@ -272,16 +298,13 @@
                                         <div class="col mr-2">
                                         <div class="h5 mb-0 font-weight-bold mb-3" style="color: #617A55;"><?php echo $apotek[0];  ?></div>
                                             <div class="text-xs font-weight-bold text-uppercase mb-1" style="font-size: 15px; color: #B3C99C;">
-                                                Total Apotek
+                                                Total kategori Obat
                                             </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-clinic-medical fa-2x" style="color: #B3C99C;"></i>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="text-center">
-                                    <a href="store.php" class="small-box-footer">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -301,10 +324,7 @@
                                             <i class="fas fa-book-medical fa-2x" style="color: #B3C99C;"></i>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="text-center">
-                                    <a href="laporanObat.php" class="small-box-footer">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
+                                </div>                        
                             </div>
                         </div>
                     </div>
@@ -329,7 +349,7 @@
                                         <?php
                                         // Mengambil data dari database atau sumber data lainnya
                                         include "koneksi.php";
-                                        $query = "SELECT DATE_FORMAT(tanggal, '%Y-%m') AS bulan, SUM(jumlah_obat) AS total_penjualan FROM detail_transaksi JOIN transaksi ON detail_transaksi.id_transaksi = transaksi.id_transaksi GROUP BY DATE_FORMAT(tanggal, '%Y-%m');";
+                                        $query = "SELECT DATE_FORMAT(tanggal, '%Y-%m') AS bulan, SUM(jumlah_obat) AS total_penjualan FROM detail_transaksi JOIN transaksi ON detail_transaksi.id_transaksi = transaksi.id_transaksi WHERE id_apotek=$id_apotek GROUP BY DATE_FORMAT(tanggal, '%Y-%m');";
                                         $result = mysqli_query($koneksi, $query);
 
                                         $data = array();
@@ -386,18 +406,15 @@
                                         <?php
                                         // Buat koneksi ke database
                                         
-                                        $query = "SELECT apotek.id_apotek, apotek.nama AS nama_apotek, SUM(obat.stok) AS jumlah_stok
-                                        FROM obat
-                                        JOIN apotek ON obat.id_apotek = apotek.id_apotek
-                                        GROUP BY apotek.id_apotek, apotek.nama;
-                                        ";
+                                        $query = "SELECT nama_obat AS nama, SUM(obat.stok) AS jumlah_stok
+                                        FROM obat;";
                                         $result = mysqli_query($koneksi, $query);
 
                                         $data = array();
 
                                         // Loop melalui hasil query dan simpan data ke dalam array
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            $data[$row['nama_apotek']] = $row['jumlah_stok'];
+                                            $data[$row['nama']] = $row['jumlah_stok'];
                                         }
 
                                         // Konversi data menjadi format yang dapat digunakan oleh Chart.js

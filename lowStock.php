@@ -55,7 +55,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
           <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
           </div>
-          <div class="sidebar-brand-text mx-3">DIRECTION</div>
+          <div class="sidebar-brand-text mx-3">Apotik +</div>
         </a>
 
         <!-- Divider -->
@@ -88,7 +88,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                     <div class=" py-2 collapse-inner rounded">
                         <h6 class="collapse-header" style="color: #fff">data table:</h6>
                         <a class="collapse-item" href="tables.php" style="color: #fff">Tabel Obat</a>
-                        <a class="collapse-item" href="" style="color: #fff">Laporan</a>
+                        <a class="collapse-item" href="laporanObat.php" style="color: #fff">Laporan</a>
                     </div>
                 </div>
         </li>

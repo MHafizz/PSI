@@ -48,7 +48,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">DIRECTION</div>
+            <div class="sidebar-brand-text mx-3">Apotik +</div>
             </a>
 
             <!-- Divider -->
@@ -81,7 +81,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                         <div class=" py-2 collapse-inner rounded">
                             <h6 class="collapse-header" style="color: #fff">data table:</h6>
                             <a class="collapse-item" href="tables.php" style="color: #fff">Tabel Obat</a>
-                            <a class="collapse-item" href="" style="color: #fff">Laporan</a>
+                            <a class="collapse-item" href="laporanObat.php" style="color: #fff">Laporan</a>
                         </div>
                     </div>
             </li>
@@ -175,7 +175,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                       <div class="small text-gray-500"><?php echo date('l, d-m-Y');?></div>
                       <?php echo $row["Nama_Obat"]?>
                       akan kadaluarsa
-                      <?php echo $row["selisih_hari"] ?>
+                      <b><?php echo $row["selisih_hari"] ?></b>
                       hari lagi.
                     </div>
                   </a>
@@ -260,7 +260,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
         <footer class="sticky-footer bg-white">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
-              <span>Apotik Direction</span>
+              <span>Apotik Apotik +</span>
             </div>
           </div>
         </footer>
