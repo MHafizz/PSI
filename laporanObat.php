@@ -221,113 +221,116 @@
 
                     <!-- Pilih apotek -->
                     <div class="">
-                        <form action="">                    
-                                <div class="form-group row">
-                                    <label for="status" class="col-sm-1 col-form-label">Apotek</label>
-                                    <div class="col-sm-7">
-                                        <select class="form-control" id="status" name="pilihan_apotek">
+                        <form action="" method="POST">
+                            <div class="form-group row">
+                                <label for="status" class="col-sm-1 col-form-label">Apotek</label>
+                                <div class="col-sm-7">
+                                    <select class="form-control" id="status" name="pilihan_apotek">
+                                        <option>---</option>
                                         <?php
-                                            include "koneksi.php";
-                                            $querypilihan = "SELECT id_apotek, nama FROM apotek";
-                                            $hasilpilihan = mysqli_query($koneksi, $querypilihan);
-                                            while($rowpilihan=mysqli_fetch_array($hasilpilihan)){?>
-                                            <option value="<?= $rowpilihan['id_apotek'];?>"><?= $rowpilihan['nama']; ?></option>
+                                        include "koneksi.php";
+                                        $id_apotek='1';
+                                        $querypilihan = "SELECT id_apotek, nama FROM apotek";
+                                        $hasilpilihan = mysqli_query($koneksi, $querypilihan);
+                                        while ($rowpilihan = mysqli_fetch_array($hasilpilihan)) { ?>
+                                            <option value="<?= $rowpilihan['id_apotek']; ?>"><?= $rowpilihan['nama']; ?></option>
                                         <?php
-                                            }
-                                        ?>                                            
-                                        </select>
-                                    </div>
-                                    <button type="submit" class="btn btn-success" name="pilih_apotek">Pilih</button>
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
-                                
+                                <button type="submit" class="btn btn-success" name="pilih_apotek">Pilih</button>
+                            </div>
                         </form>
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     </div>
+                    </div>
+
+                    
 
                     <!-- Content Row -->
                     <div class="row">
+                        <?php
+                        include "koneksi.php";
+                        if (isset($_POST['pilih_apotek'])) {
+                            $id_apotek = $_POST['pilihan_apotek'];
 
-                        <!-- Total Stok Obat -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            
-                                            <?php 
-                                            
-                                            include "koneksi.php"; 
-                                            $id_apotek='1'                                           ;
-                                            if (isset($_POST['pilih_apotek'])) {
-                                                $id_apotek = $_POST['pilihan_apotek'];
-                                                return $id_apotek;
-                                            }
-                                            // Total Stok
-                                            $querystok = "SELECT SUM(stok) AS total_stok FROM obat WHERE kadaluarsa > CURDATE() and id_apotek = $id_apotek;";
-                                            $hasilstok = mysqli_query($koneksi, $querystok);
-                                            $stok = mysqli_fetch_row($hasilstok);
+                            // Total Stok
+                            $querystok = "SELECT SUM(stok) AS total_stok FROM obat WHERE kadaluarsa > CURDATE() and id_apotek = $id_apotek";
+                            $hasilstok = mysqli_query($koneksi, $querystok);
+                            $stok = mysqli_fetch_row($hasilstok);
 
-                                            // Total kategori obat Apotek cabang
-                                            $queryapotek = "SELECT COUNT(DISTINCT Nama_Obat) as kategori FROM `obat` WHERE id_apotek = $id_apotek;";
-                                            $hasilapotek = mysqli_query($koneksi, $queryapotek);
-                                            $apotek = mysqli_fetch_row($hasilapotek);
+                            // Total kategori obat Apotek cabang
+                            $queryapotek = "SELECT COUNT(DISTINCT Nama_Obat) as kategori FROM `obat` WHERE id_apotek = $id_apotek";
+                            $hasilapotek = mysqli_query($koneksi, $queryapotek);
+                            $apotek = mysqli_fetch_row($hasilapotek);
 
-                                            // Total Obat Terjual
-                                            $queryjumlah = "SELECT SUM(jumlah_obat) AS total FROM detail_transaksi WHERE id_apotek = $id_apotek";
-                                            $hasiljumlah = mysqli_query($koneksi, $queryjumlah);
-                                            $jumlah = mysqli_fetch_row($hasiljumlah);
-
-                                            ?>
-                                            <div class="h5 mb-0 font-weight-bold mb-3" style="color: #617A55;"><?php echo $stok[0];  ?></div>
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="font-size: 15px; color: #B3C99C;">
-                                                Total Stok Obat
+                            // Total Obat Terjual
+                            $queryjumlah = "SELECT SUM(jumlah_obat) AS total FROM detail_transaksi WHERE id_apotek = $id_apotek";
+                            $hasiljumlah = mysqli_query($koneksi, $queryjumlah);
+                            $jumlah = mysqli_fetch_row($hasiljumlah);
+                        ?>
+                            <!-- Total Stok Obat -->
+                            <div class="col-xl-4 col-md-6 mb-4">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="h5 mb-0 font-weight-bold mb-3" style="color: #617A55;"><?php echo $stok[0]; ?></div>
+                                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="font-size: 15px; color: #B3C99C;">
+                                                    Total Stok Obat
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-pills fa-2x " style="color: #B3C99C;"></i>
-                                        </div>                                        
-                                    </div>                                                                        
-                                </div>                                
-                            </div>
-                        </div>
-
-                        <!-- Total Apotek -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                        <div class="h5 mb-0 font-weight-bold mb-3" style="color: #617A55;"><?php echo $apotek[0];  ?></div>
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="font-size: 15px; color: #B3C99C;">
-                                                Total kategori Obat
+                                            <div class="col-auto">
+                                                <i class="fas fa-pills fa-2x" style="color: #B3C99C;"></i>
                                             </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-clinic-medical fa-2x" style="color: #B3C99C;"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Total Obat Terjual -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                        <div class="h5 mb-0 font-weight-bold mb-3" style="color: #617A55;"><?php echo $jumlah[0];  ?></div>
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="font-size: 15px; color: #B3C99C;">
-                                                Total Obat Terjual
+                            <!-- Total Apotek -->
+                            <div class="col-xl-4 col-md-6 mb-4">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="h5 mb-0 font-weight-bold mb-3" style="color: #617A55;"><?php echo $apotek[0]; ?></div>
+                                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="font-size: 15px; color: #B3C99C;">
+                                                    Total kategori Obat
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-clinic-medical fa-2x" style="color: #B3C99C;"></i>
                                             </div>
                                         </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-book-medical fa-2x" style="color: #B3C99C;"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Total Obat Terjual -->
+                            <div class="col-xl-4 col-md-6 mb-4">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="h5 mb-0 font-weight-bold mb-3" style="color: #617A55;"><?php echo $jumlah[0]; ?></div>
+                                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="font-size: 15px; color: #B3C99C;">
+                                                    Total Obat Terjual
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-book-medical fa-2x" style="color: #B3C99C;"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>                        
+                                </div>
                             </div>
-                        </div>
+                        <?php
+                        }
+                        ?>
                     </div>
+
 
                     <!-- Content Row -->
 
