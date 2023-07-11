@@ -243,22 +243,24 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                     <label for="dSelect" class="form-label">Pilih Jenis Kelamin</label>
                                     <select id="Select" class="form-select" name="jenisKelamin">
                                         <?php
-                                        foreach(nilai_kolom('jenis_kelamin') as $keluhan){
-                                            echo '<option value="'.$keluhan['jenis_kelamin'].'">'.$keluhan['jenis_kelamin'].'</option>';
-                                        }
+                                        // foreach(nilai_kolom('jenis_kelamin') as $keluhan){
+                                        //     echo '<option value="'.$keluhan['jenis_kelamin'].'">'.$keluhan['jenis_kelamin'].'</option>';
+                                        // }
                                         ?>
+                                        <option value="">laki-laki</option>
+                                        <option value="">Perempuan</option>
                                     </select>
                                 </div>                                                           
                                 <div class="mb-3">
                                     <label for="dSelect" class="form-label">Masukkan Usia Pelanggan</label>
-                                    <input type="" class="form-control" name="usia" aria-describedby="emailHelp">
+                                    <input type="text" class="form-control" name="usia" aria-describedby="emailHelp">
                                     <!-- <select id="Select" class="form-select" name="usia">
                                         <?php
                                         foreach(nilai_kolom('usia') as $keluhan){
                                             echo '<option value="'.$keluhan['usia'].'">'.$keluhan['usia'].'</option>';
                                         }
                                         ?>
-                                    </select> -->
+                                    </select>  -->
                                 </div>                                                           
                                 <div class="mb-3">
                                     <label for="dSelect" class="form-label">Apakah Mempunyai Riwayat Alergi?</label>
@@ -274,10 +276,12 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                     <label for="dSelect" class="form-label">Apakah Mempunyai Riwayat Penyakit?</label>
                                     <select id="Select" class="form-select" name="riwayat_penyakit">
                                         <?php
-                                        foreach(nilai_kolom('riwayat_penyakit') as $keluhan){
-                                            echo '<option value="'.$keluhan['riwayat_penyakit'].'">'.$keluhan['riwayat_penyakit'].'</option>';
-                                        }
+                                        // foreach(nilai_kolom('riwayat_penyakit') as $keluhan){
+                                        //     echo '<option value="'.$keluhan['riwayat_penyakit'].'">'.$keluhan['riwayat_penyakit'].'</option>';
+                                        // }
                                         ?>
+                                        <option value="">Ya</option>
+                                        <option value="">Tidak</option>
                                     </select>
                                 </div>                                                           
                                 <button type="submit" class="btn btn-primary" name="submit" data-bs-target="#staticBackdrop">Submit</button>

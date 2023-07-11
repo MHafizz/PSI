@@ -299,13 +299,13 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                 }
 
                             ?>
-                            <h1 class="card-title" style="text-align: center;"><?php echo $rekomendasi ?></h1>
+                            <h1 class="card-title ml-3" style="text-align: center;"><?php echo $rekomendasi ?></h1>
                             <br>
                             <div style="display: flex;">
                                 <div style="flex: 1;">
-                                    <img src="img\obat.jpg" alt="" class = "rounded"style="width: 600px;">
+                                    <img src="img\obat.jpg" alt="" class = "rounded"style="width: 500px;">
                                 </div>
-                                <div style="flex: 1;">                                                                    
+                                <div class="ml-4" style="flex: 1;">                                                                    
                                     <table>
                                         <tr>
                                             <th>Indikasi :</th>
