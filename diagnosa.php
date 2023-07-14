@@ -292,14 +292,14 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                 if(isset($_POST['submit'])){
 
                                     //MENGHITUNG ADA BERAPA KALI LABEL MUNCUL
-                                    $obatA = jumlah_label('Obat A');
-                                    $obatB = jumlah_label('Obat B');
-                                    $obatC = jumlah_label('Obat C');
+                                    // $obatA = jumlah_label('Obat A');
+                                    // $obatB = jumlah_label('Obat B');
+                                    // $obatC = jumlah_label('Obat C');
 
-                                    //MENGHITUNG ADA BERAPA BANYAK FITUR GEJALA1 YANG MUNCUL PADA SETIAP LABEL
-                                    $gejala1A = hitung_jumlah("gejala1",$_POST["gejala1"],"Obat A");                                                                        
-                                    $gejala1B = hitung_jumlah("gejala1",$_POST["gejala1"],"Obat B");
-                                    $gejala1C = hitung_jumlah("gejala1",$_POST["gejala1"],"Obat C");
+                                    // //MENGHITUNG ADA BERAPA BANYAK FITUR GEJALA1 YANG MUNCUL PADA SETIAP LABEL
+                                    // $gejala1A = hitung_jumlah("gejala1",$_POST["gejala1"],"Obat A");                                                                        
+                                    // $gejala1B = hitung_jumlah("gejala1",$_POST["gejala1"],"Obat B");
+                                    // $gejala1C = hitung_jumlah("gejala1",$_POST["gejala1"],"Obat C");
 
                                     //MENGHITUNG ADA BERAPA BANYAK FITUR GEJALA2 YANG MUNCUL PADA SETIAP LABEL
                                     // $gejala2A = hitung_jumlah("gejala2",$_POST["gejala2"],"Obat A");                                                                        
@@ -315,34 +315,34 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                     }
 
                                     //MENGHITUNG ADA BERAPA BANYAK FITUR USIA YANG MUNCUL PADA SETIAP LABEL
-                                    $usiaA = hitung_jumlah("usia",$usia,"Obat A");                                                                        
-                                    $usiaB = hitung_jumlah("usia",$usia,"Obat B");
-                                    $usiaC = hitung_jumlah("usia",$usia,"Obat C");
+                                    // $usiaA = hitung_jumlah("usia",$usia,"Obat A");                                                                        
+                                    // $usiaB = hitung_jumlah("usia",$usia,"Obat B");
+                                    // $usiaC = hitung_jumlah("usia",$usia,"Obat C");
 
-                                    //MENGHITUNG ADA BERAPA BANYAK FITUR RIWAYAT ALERGI YANG MUNCUL PADA SETIAP LABEL
-                                    $riwayat_alergiA = hitung_jumlah("riwayat_alergi",$_POST["riwayat_alergi"],"Obat A");                                                                        
-                                    $riwayat_alergiB = hitung_jumlah("riwayat_alergi",$_POST["riwayat_alergi"],"Obat B");
-                                    $riwayat_alergiC = hitung_jumlah("riwayat_alergi",$_POST["riwayat_alergi"],"Obat C");
+                                    // //MENGHITUNG ADA BERAPA BANYAK FITUR RIWAYAT ALERGI YANG MUNCUL PADA SETIAP LABEL
+                                    // $riwayat_alergiA = hitung_jumlah("riwayat_alergi",$_POST["riwayat_alergi"],"Obat A");                                                                        
+                                    // $riwayat_alergiB = hitung_jumlah("riwayat_alergi",$_POST["riwayat_alergi"],"Obat B");
+                                    // $riwayat_alergiC = hitung_jumlah("riwayat_alergi",$_POST["riwayat_alergi"],"Obat C");
                                     
                                     //MENGHITUNG NILAI NBC
-                                    $prob_obatA = ($gejala1A/$obatA)*
-                                    ($usiaA/$obatA)*($riwayat_alergiA/$obatA)*($obatA/total_label());
+                                    // $prob_obatA = ($gejala1A/$obatA)*
+                                    // ($usiaA/$obatA)*($riwayat_alergiA/$obatA)*($obatA/total_label());
                                     
-                                    $prob_obatB = ($gejala1B/$obatB)*
-                                    ($usiaB/$obatB)*($riwayat_alergiB/$obatB)*($obatB/total_label());
+                                    // $prob_obatB = ($gejala1B/$obatB)*
+                                    // ($usiaB/$obatB)*($riwayat_alergiB/$obatB)*($obatB/total_label());
 
-                                    $prob_obatC = ($gejala1C/$obatC)*
-                                    ($usiaC/$obatC)*($riwayat_alergiC/$obatC)*($obatC/total_label());
+                                    // $prob_obatC = ($gejala1C/$obatC)*
+                                    // ($usiaC/$obatC)*($riwayat_alergiC/$obatC)*($obatC/total_label());
 
-                                    $prob_total = $prob_obatA + $prob_obatB + $prob_obatC;
+                                    // $prob_total = $prob_obatA + $prob_obatB + $prob_obatC;
 
-                                    $prob_obatA /= $prob_total;
-                                    $prob_obatB /= $prob_total;
-                                    $prob_obatC /= $prob_total;                                    
+                                    // $prob_obatA /= $prob_total;
+                                    // $prob_obatB /= $prob_total;
+                                    // $prob_obatC /= $prob_total;                                    
 
-                                    $prob_obatA = number_format($prob_obatA,'4','.','');
-                                    $prob_obatB = number_format($prob_obatB,'4','.','');
-                                    $prob_obatC = number_format($prob_obatC,'4','.','');
+                                    // $prob_obatA = number_format($prob_obatA,'4','.','');
+                                    // $prob_obatB = number_format($prob_obatB,'4','.','');
+                                    // $prob_obatC = number_format($prob_obatC,'4','.','');
 
                                     //MENENTUKAN NILAI TERBESAR
                                     // if($prob_obatA > $prob_obatB && $prob_obatA > $prob_obatC){
@@ -353,7 +353,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                     //     echo " <script> alert('Obat C') </script>";
                                     // }
                                                                             
-                                     echo "\n $prob_obatA \n $prob_obatB \n $prob_obatC $usia";
+                                    //  echo "\n $prob_obatA \n $prob_obatB \n $prob_obatC $usia";
                                     //  echo "
                                     // <script>
                                     //     alert('Tambah Data Gagal');
