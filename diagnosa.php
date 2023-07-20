@@ -247,8 +247,8 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                         //     echo '<option value="'.$keluhan['jenis_kelamin'].'">'.$keluhan['jenis_kelamin'].'</option>';
                                         // }
                                         ?>
-                                        <option value="">laki-laki</option>
-                                        <option value="">Perempuan</option>
+                                        <option value="Laki-laki">Laki-laki</option>
+                                        <option value="Perempuan">Perempuan</option>
                                     </select>
                                 </div>                                                           
                                 <div class="mb-3">
@@ -280,8 +280,8 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                         //     echo '<option value="'.$keluhan['riwayat_penyakit'].'">'.$keluhan['riwayat_penyakit'].'</option>';
                                         // }
                                         ?>
-                                        <option value="">Ya</option>
-                                        <option value="">Tidak</option>
+                                        <option value="Ya">Ya</option>
+                                        <option value="Tidak">Tidak</option>
                                     </select>
                                 </div>                                                           
                                 <button type="submit" class="btn btn-primary" name="submit" data-bs-target="#staticBackdrop">Submit</button>

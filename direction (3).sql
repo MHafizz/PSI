@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2023 at 08:49 AM
+-- Generation Time: Jul 20, 2023 at 05:11 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -41,8 +41,9 @@ CREATE TABLE `apotek` (
 INSERT INTO `apotek` (`id_apotek`, `nama`, `status`, `alamat`) VALUES
 (1, 'Apotek Empat Sehat', 'Aktif', 'Jl. Pahlawan No. 123'),
 (2, 'Apotek Sentosa', 'Aktif', 'Jl. Merdeka No. 456'),
-(3, 'Apotek Sejahtera', 'Aktif', 'Jl. Sudirman No. 789'),
-(5, 'Apotek Lima Sempurna', 'Aktif', 'JL. Bukan Kaliurang No. 1011');
+(3, 'Apotek Sejahtera', 'Tidak aktif', 'Jl. Sudirman No. 789'),
+(5, 'Apotek Lima Sempurna', 'Tidak aktif', 'JL. Bukan Kaliurang No. 1011'),
+(7, 'apotik mark lee', 'Aktif', 'jl.dream');
 
 -- --------------------------------------------------------
 
@@ -54,36 +55,39 @@ CREATE TABLE `data_set` (
   `id` int(11) NOT NULL,
   `usia` varchar(12) DEFAULT NULL,
   `gejala1` varchar(20) DEFAULT NULL,
-  `gejala2` varchar(20) DEFAULT NULL,
   `riwayat_alergi` varchar(5) DEFAULT NULL,
-  `obat` varchar(10) DEFAULT NULL
+  `obat` varchar(10) DEFAULT NULL,
+  `kelamin` varchar(10) DEFAULT NULL,
+  `riwayat_penyakit` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `data_set`
 --
 
-INSERT INTO `data_set` (`id`, `usia`, `gejala1`, `gejala2`, `riwayat_alergi`, `obat`) VALUES
-(1, 'Dewasa', 'Batuk', 'Sakit tenggorokan', 'Tidak', 'Obat A'),
-(2, 'Anak-anak', 'Mual', 'Hidung tersumbat', 'Iya', 'Obat A'),
-(3, 'Anak-anak', 'Pusing', 'Sakit tenggorokan', 'Tidak', 'Obat B'),
-(4, 'Lanjut usia', 'Demam', 'Nyeri', 'Iya', 'Obat A'),
-(5, 'Anak-anak', 'Mual', 'Hidung tersumbat', 'Tidak', 'Obat B'),
-(6, 'Dewasa', 'Pusing', 'Nyeri', 'Iya', 'Obat C'),
-(7, 'Lanjut usia', 'Batuk', 'Sakit tenggorokan', 'Iya', 'Obat C'),
-(8, 'Anak-anak', 'Sesak napas', 'Hidung tersumbat', 'Tidak', 'Obat C'),
-(9, 'Dewasa', 'Pusing', 'Sakit tenggorokan', 'Tidak', 'Obat A'),
-(10, 'Lanjut usia', 'Mual', 'Nyeri', 'Iya', 'Obat A'),
-(11, 'Lanjut usia', 'Batuk', 'Sakit tenggorokan', 'Tidak', 'Obat B'),
-(12, 'Dewasa', 'Demam', 'Sakit tenggorokan', 'Tidak', 'Obat B'),
-(13, 'Dewasa', 'Sesak napas', 'Nyeri', 'Iya', 'Obat C'),
-(14, 'Anak-anak', 'Batuk', 'Nyeri', 'Tidak', 'Obat A'),
-(15, 'Lanjut usia', 'Mual', 'Sakit tenggorokan', 'Tidak', 'Obat A'),
-(16, 'Dewasa', 'Pusing', 'Sakit tenggorokan', 'Iya', 'Obat B'),
-(17, 'Anak-anak', 'Demam', 'Hidung tersumbat', 'Iya', 'Obat C'),
-(18, 'Dewasa', 'Batuk', 'Sakit tenggorokan', 'Tidak', 'Obat B'),
-(19, 'Anak-anak', 'Sesak napas', 'Nyeri', 'Iya', 'Obat C'),
-(20, 'Dewasa', 'Demam', 'Hidung tersumbat', 'Tidak', 'Obat C');
+INSERT INTO `data_set` (`id`, `usia`, `gejala1`, `riwayat_alergi`, `obat`, `kelamin`, `riwayat_penyakit`) VALUES
+(1, 'Dewasa', 'Batuk', 'Tidak', 'Obat A', 'Laki-laki', 'Ya'),
+(2, 'Anak-anak', 'Mual', 'Iya', 'Obat A', 'Perempuan', 'Tidak'),
+(3, 'Anak-anak', 'Pusing', 'Tidak', 'Obat B', 'Laki-laki', 'Ya'),
+(4, 'Lanjut usia', 'Demam', 'Iya', 'Obat A', 'Perempuan', 'Tidak'),
+(5, 'Anak-anak', 'Mual', 'Tidak', 'Obat B', 'Laki-laki', 'Tidak'),
+(6, 'Dewasa', 'Pusing', 'Iya', 'Obat C', 'Perempuan', 'Ya'),
+(7, 'Lanjut usia', 'Batuk', 'Iya', 'Obat C', 'Laki-laki', 'Ya'),
+(8, 'Anak-anak', 'Sesak napas', 'Tidak', 'Obat C', 'Perempuan', 'Tidak'),
+(9, 'Dewasa', 'Pusing', 'Tidak', 'Obat A', 'Laki-laki', 'Ya'),
+(10, 'Lanjut usia', 'Mual', 'Iya', 'Obat A', 'Perempuan', 'Tidak'),
+(11, 'Lanjut usia', 'Batuk', 'Tidak', 'Obat B', 'Laki-laki', 'Ya'),
+(12, 'Dewasa', 'Demam', 'Tidak', 'Obat B', 'Perempuan', 'Tidak'),
+(13, 'Dewasa', 'Sesak napas', 'Iya', 'Obat C', 'Laki-laki', 'Ya'),
+(14, 'Anak-anak', 'Batuk', 'Tidak', 'Obat A', 'Perempuan', 'Tidak'),
+(15, 'Lanjut usia', 'Mual', 'Tidak', 'Obat A', 'Laki-laki', 'Tidak'),
+(16, 'Dewasa', 'Pusing', 'Iya', 'Obat B', 'Perempuan', 'Ya'),
+(17, 'Anak-anak', 'Demam', 'Iya', 'Obat C', 'Laki-laki', 'Ya'),
+(18, 'Dewasa', 'Batuk', 'Tidak', 'Obat B', 'Perempuan', 'Tidak'),
+(19, 'Anak-anak', 'Sesak napas', 'Iya', 'Obat C', 'Laki-laki', 'Ya'),
+(20, 'Dewasa', 'Demam', 'Tidak', 'Obat C', 'Perempuan', 'Tidak'),
+(21, 'Lanjut usia', 'Batuk', 'Tidak', 'Obat A', 'Perempuan', 'Ya'),
+(22, 'Anak-anak', 'Mual', 'Tidak', 'Obat A', 'Laki-laki', 'Tidak');
 
 -- --------------------------------------------------------
 
@@ -147,13 +151,15 @@ CREATE TABLE `obat` (
 --
 
 INSERT INTO `obat` (`ID_Obat`, `Nama_Obat`, `Harga_Satuan`, `Stok`, `kode_produksi`, `kadaluarsa`, `produsen`, `penyimpanan`, `id_apotek`) VALUES
-(1, 'Paracetamol', 5000, 100, '12345', '2023-07-01', 'ABC Pharma', 'Gudang X', 1),
+(1, 'Paracetamol', 5000, 100, '12345', '2023-07-14', 'ABC Pharma', 'Gudang X', 1),
 (2, 'Amoxicillin', 10000, 50, '67890', '2023-12-15', 'XYZ Pharmaceuticals', 'Gudang Y', 2),
 (3, 'Omeprazole', 8000, 75, '24680', '2023-11-30', 'PQR Med', 'Gudang Z', 3),
 (4, 'Aspirin', 3000, 200, '13579', '2024-06-30', 'ABC Pharma', 'Gudang X', 1),
 (5, 'Ibuprofen', 7000, 80, '86420', '2024-09-30', 'XYZ Pharmaceuticals', 'Gudang Y', 2),
 (6, 'Salbutamol', 20000, 20, '71082', '2023-09-27', 'PQR Med', 'Gudang Z', 5),
-(7, ' Fentanyl', 50000, 200, '74829', '2023-09-28', 'ABC Pharma', 'Gudang X', 3);
+(7, ' Fentanyl', 50000, 200, '74829', '2023-09-28', 'ABC Pharma', 'Gudang X', 3),
+(9, 'Panadol', 5000, 100, '98122', '2023-10-19', 'ABC Pharma', 'Gudang X', 1),
+(10, 'paracetamol121', 20000, 33, '12123', '2023-07-15', 'kimia', 'Gudang X', 7);
 
 -- --------------------------------------------------------
 
@@ -228,7 +234,13 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `apotek`
 --
 ALTER TABLE `apotek`
-  MODIFY `id_apotek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_apotek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `data_set`
+--
+ALTER TABLE `data_set`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `detail_transaksi`
@@ -240,7 +252,7 @@ ALTER TABLE `detail_transaksi`
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `ID_Obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID_Obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `transaksi`

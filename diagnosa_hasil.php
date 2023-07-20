@@ -241,10 +241,10 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                     $gejala1B = hitung_jumlah("gejala1",$_POST["gejala1"],"Obat B");
                                     $gejala1C = hitung_jumlah("gejala1",$_POST["gejala1"],"Obat C");
 
-                                    //MENGHITUNG ADA BERAPA BANYAK FITUR GEJALA2 YANG MUNCUL PADA SETIAP LABEL
-                                    // $gejala2A = hitung_jumlah("gejala2",$_POST["gejala2"],"Obat A");                                                                        
-                                    // $gejala2B = hitung_jumlah("gejala2",$_POST["gejala2"],"Obat B");
-                                    // $gejala2C = hitung_jumlah("gejala2",$_POST["gejala2"],"Obat C");
+                                    //MENGHITUNG ADA BERAPA BANYAK FITUR KELAMIN YANG MUNCUL PADA SETIAP LABEL
+                                    $kelaminA = hitung_jumlah("kelamin",$_POST["jenisKelamin"],"Obat A");                                                                        
+                                    $kelaminB = hitung_jumlah("kelamin",$_POST["jenisKelamin"],"Obat B");
+                                    $kelaminC = hitung_jumlah("kelamin",$_POST["jenisKelamin"],"Obat C");
 
                                     if ($_POST["usia"]<=18){
                                         $usia = "Anak-anak";
@@ -264,15 +264,20 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                     $riwayat_alergiB = hitung_jumlah("riwayat_alergi",$_POST["riwayat_alergi"],"Obat B");
                                     $riwayat_alergiC = hitung_jumlah("riwayat_alergi",$_POST["riwayat_alergi"],"Obat C");
                                     
-                                    //MENGHITUNG NILAI NBC
-                                    $prob_obatA = ($gejala1A/$obatA)*
-                                    ($usiaA/$obatA)*($riwayat_alergiA/$obatA)*($obatA/total_label());
+                                    //MENGHITUNG ADA BERAPA BANYAK FITUR RIWAYAT ALERGI YANG MUNCUL PADA SETIAP LABEL
+                                    $riwayat_penyakitA = hitung_jumlah("riwayat_penyakit",$_POST["riwayat_penyakit"],"Obat A");                                                                        
+                                    $riwayat_penyakitB= hitung_jumlah("riwayat_penyakit",$_POST["riwayat_penyakit"],"Obat B");
+                                    $riwayat_penyakitC= hitung_jumlah("riwayat_penyakit",$_POST["riwayat_penyakit"],"Obat C");
                                     
-                                    $prob_obatB = ($gejala1B/$obatB)*
-                                    ($usiaB/$obatB)*($riwayat_alergiB/$obatB)*($obatB/total_label());
+                                    //MENGHITUNG NILAI NBC
+                                    $prob_obatA = ($gejala1A/$obatA)*($kelaminA/$obatA)*
+                                    ($usiaA/$obatA)*($riwayat_alergiA/$obatA)*($riwayat_penyakitA/$obatA)*($obatA/total_label());
+                                    
+                                    $prob_obatB = ($gejala1B/$obatB)*($kelaminB/$obatB)*
+                                    ($usiaB/$obatB)*($riwayat_alergiB/$obatB)*($riwayat_penyakitB/$obatB)*($obatB/total_label());
 
-                                    $prob_obatC = ($gejala1C/$obatC)*
-                                    ($usiaC/$obatC)*($riwayat_alergiC/$obatC)*($obatC/total_label());
+                                    $prob_obatC = ($gejala1C/$obatC)*($kelaminC/$obatC)*
+                                    ($usiaC/$obatC)*($riwayat_alergiC/$obatC)*($riwayat_penyakitC/$obatC)*($obatC/total_label());
 
                                     $prob_total = $prob_obatA + $prob_obatB + $prob_obatC;
 
@@ -293,6 +298,22 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                         $rekomendasi =  "Obat B";
                                     }else {
                                         $rekomendasi = "Obat C";
+                                    }
+
+
+                                    // MENAMBAHKAN HASIL DIAGNOSA KE DATASET
+                                    $gejala1 = $_POST['gejala1'];
+                                    $jenisKelamin = $_POST['jenisKelamin'];
+                                    $riwayat_alergi = $_POST['riwayat_alergi'];
+                                    $riwayat_penyakit = $_POST['riwayat_penyakit'];                                    
+
+                                    $sql = "INSERT INTO data_set (id, gejala1, kelamin, usia, riwayat_alergi, riwayat_penyakit, obat)
+                                            VALUES ('','$gejala1', '$jenisKelamin', '$usia', '$riwayat_alergi', '$riwayat_penyakit', '$rekomendasi')";
+
+                                    if ($koneksi->query($sql) === TRUE) {
+                                        echo "Data berhasil dimasukkan ke tabel data_set.";
+                                    } else {
+                                        echo "Error: " . $sql . "<br>" . $conn->error;
                                     }
                                                                             
                                     //  echo " $rekomendasi\n $prob_obatA \n $prob_obatB \n $prob_obatC $usia";                             
