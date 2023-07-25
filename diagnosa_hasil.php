@@ -308,15 +308,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                     $riwayat_penyakit = $_POST['riwayat_penyakit'];                                    
 
                                     $sql = "INSERT INTO data_set (id, gejala1, kelamin, usia, riwayat_alergi, riwayat_penyakit, obat)
-                                            VALUES ('','$gejala1', '$jenisKelamin', '$usia', '$riwayat_alergi', '$riwayat_penyakit', '$rekomendasi')";
-
-                                    if ($koneksi->query($sql) === TRUE) {
-                                        echo "Data berhasil dimasukkan ke tabel data_set.";
-                                    } else {
-                                        echo "Error: " . $sql . "<br>" . $conn->error;
-                                    }
-                                                                            
-                                    //  echo " $rekomendasi\n $prob_obatA \n $prob_obatB \n $prob_obatC $usia";                             
+                                            VALUES ('','$gejala1', '$jenisKelamin', '$usia', '$riwayat_alergi', '$riwayat_penyakit', '$rekomendasi')";                                                                     
                                 }
 
                             ?>

@@ -223,8 +223,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Usulan Obat</h6>
-                            <!-- Button trigger modal -->
+                            <h6 class="m-0 font-weight-bold text-primary">Usulan Obat</h6>                            
                         
                         <div class="card-body">
                             <!-- ... -->
