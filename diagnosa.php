@@ -240,26 +240,14 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                 </div>                                                           
                                 <div class="mb-3">
                                     <label for="dSelect" class="form-label">Pilih Jenis Kelamin</label>
-                                    <select id="Select" class="form-select" name="jenisKelamin">
-                                        <?php
-                                        // foreach(nilai_kolom('jenis_kelamin') as $keluhan){
-                                        //     echo '<option value="'.$keluhan['jenis_kelamin'].'">'.$keluhan['jenis_kelamin'].'</option>';
-                                        // }
-                                        ?>
+                                    <select id="Select" class="form-select" name="jenisKelamin">                                        
                                         <option value="Laki-laki">Laki-laki</option>
                                         <option value="Perempuan">Perempuan</option>
                                     </select>
                                 </div>                                                           
                                 <div class="mb-3">
                                     <label for="dSelect" class="form-label">Masukkan Usia Pelanggan</label>
-                                    <input type="text" class="form-control" name="usia" aria-describedby="emailHelp">
-                                    <!-- <select id="Select" class="form-select" name="usia">
-                                        <?php
-                                        foreach(nilai_kolom('usia') as $keluhan){
-                                            echo '<option value="'.$keluhan['usia'].'">'.$keluhan['usia'].'</option>';
-                                        }
-                                        ?>
-                                    </select>  -->
+                                    <input type="text" class="form-control" name="usia">                                    
                                 </div>                                                           
                                 <div class="mb-3">
                                     <label for="dSelect" class="form-label">Apakah Mempunyai Riwayat Alergi?</label>
@@ -274,94 +262,14 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                 <div class="mb-3">
                                     <label for="dSelect" class="form-label">Apakah Mempunyai Riwayat Penyakit?</label>
                                     <select id="Select" class="form-select" name="riwayat_penyakit">
-                                        <?php
-                                        // foreach(nilai_kolom('riwayat_penyakit') as $keluhan){
-                                        //     echo '<option value="'.$keluhan['riwayat_penyakit'].'">'.$keluhan['riwayat_penyakit'].'</option>';
-                                        // }
-                                        ?>
+                                      
                                         <option value="Ya">Ya</option>
                                         <option value="Tidak">Tidak</option>
                                     </select>
                                 </div>                                                           
                                 <button type="submit" class="btn btn-primary" name="submit" data-bs-target="#staticBackdrop">Submit</button>
                             </form>
-
-                            <?php
-                                
-                                if(isset($_POST['submit'])){
-
-                                    //MENGHITUNG ADA BERAPA KALI LABEL MUNCUL
-                                    // $obatA = jumlah_label('Obat A');
-                                    // $obatB = jumlah_label('Obat B');
-                                    // $obatC = jumlah_label('Obat C');
-
-                                    // //MENGHITUNG ADA BERAPA BANYAK FITUR GEJALA1 YANG MUNCUL PADA SETIAP LABEL
-                                    // $gejala1A = hitung_jumlah("gejala1",$_POST["gejala1"],"Obat A");                                                                        
-                                    // $gejala1B = hitung_jumlah("gejala1",$_POST["gejala1"],"Obat B");
-                                    // $gejala1C = hitung_jumlah("gejala1",$_POST["gejala1"],"Obat C");
-
-                                    //MENGHITUNG ADA BERAPA BANYAK FITUR GEJALA2 YANG MUNCUL PADA SETIAP LABEL
-                                    // $gejala2A = hitung_jumlah("gejala2",$_POST["gejala2"],"Obat A");                                                                        
-                                    // $gejala2B = hitung_jumlah("gejala2",$_POST["gejala2"],"Obat B");
-                                    // $gejala2C = hitung_jumlah("gejala2",$_POST["gejala2"],"Obat C");
-
-                                    if ($_POST["usia"]<=18){
-                                        $usia = "Anak-anak";
-                                    }elseif($_POST["usia"]>18 && $_POST["usia"]<=60){
-                                        $usia = "Dewasa";
-                                    }else{
-                                        $usia = "Lanjut usia";
-                                    }
-
-                                    //MENGHITUNG ADA BERAPA BANYAK FITUR USIA YANG MUNCUL PADA SETIAP LABEL
-                                    // $usiaA = hitung_jumlah("usia",$usia,"Obat A");                                                                        
-                                    // $usiaB = hitung_jumlah("usia",$usia,"Obat B");
-                                    // $usiaC = hitung_jumlah("usia",$usia,"Obat C");
-
-                                    // //MENGHITUNG ADA BERAPA BANYAK FITUR RIWAYAT ALERGI YANG MUNCUL PADA SETIAP LABEL
-                                    // $riwayat_alergiA = hitung_jumlah("riwayat_alergi",$_POST["riwayat_alergi"],"Obat A");                                                                        
-                                    // $riwayat_alergiB = hitung_jumlah("riwayat_alergi",$_POST["riwayat_alergi"],"Obat B");
-                                    // $riwayat_alergiC = hitung_jumlah("riwayat_alergi",$_POST["riwayat_alergi"],"Obat C");
-                                    
-                                    //MENGHITUNG NILAI NBC
-                                    // $prob_obatA = ($gejala1A/$obatA)*
-                                    // ($usiaA/$obatA)*($riwayat_alergiA/$obatA)*($obatA/total_label());
-                                    
-                                    // $prob_obatB = ($gejala1B/$obatB)*
-                                    // ($usiaB/$obatB)*($riwayat_alergiB/$obatB)*($obatB/total_label());
-
-                                    // $prob_obatC = ($gejala1C/$obatC)*
-                                    // ($usiaC/$obatC)*($riwayat_alergiC/$obatC)*($obatC/total_label());
-
-                                    // $prob_total = $prob_obatA + $prob_obatB + $prob_obatC;
-
-                                    // $prob_obatA /= $prob_total;
-                                    // $prob_obatB /= $prob_total;
-                                    // $prob_obatC /= $prob_total;                                    
-
-                                    // $prob_obatA = number_format($prob_obatA,'4','.','');
-                                    // $prob_obatB = number_format($prob_obatB,'4','.','');
-                                    // $prob_obatC = number_format($prob_obatC,'4','.','');
-
-                                    //MENENTUKAN NILAI TERBESAR
-                                    // if($prob_obatA > $prob_obatB && $prob_obatA > $prob_obatC){
-                                    //     echo " <script> alert('Obat A') </script>";
-                                    // }elseif($prob_obatB > $prob_obatC) {
-                                    //     echo " <script> alert('Obat B') </script>";
-                                    // }else {
-                                    //     echo " <script> alert('Obat C') </script>";
-                                    // }
-                                                                            
-                                    //  echo "\n $prob_obatA \n $prob_obatB \n $prob_obatC $usia";
-                                    //  echo "
-                                    // <script>
-                                    //     alert('Tambah Data Gagal');
-                                    //     document.location='obatKaryawan.php';
-                                    // </>
-                                    // ";
-                                }
-
-                            ?>
+                                                       
                             <!-- Modal -->
                             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
