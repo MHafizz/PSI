@@ -279,6 +279,7 @@ $kadaluarsa = mysqli_query($koneksi, $query);
                                     $prob_obatC = ($gejala1C/$obatC)*($kelaminC/$obatC)*
                                     ($usiaC/$obatC)*($riwayat_alergiC/$obatC)*($riwayat_penyakitC/$obatC)*($obatC/total_label());
 
+                                    //MELAKUKAN NORMALISASI
                                     $prob_total = $prob_obatA + $prob_obatB + $prob_obatC;
 
                                     $prob_obatA /= $prob_total;
@@ -287,11 +288,10 @@ $kadaluarsa = mysqli_query($koneksi, $query);
 
                                     $prob_obatA = number_format($prob_obatA,'4','.','');
                                     $prob_obatB = number_format($prob_obatB,'4','.','');
-                                    $prob_obatC = number_format($prob_obatC,'4','.','');
-
-                                    $rekomendasi ="";
+                                    $prob_obatC = number_format($prob_obatC,'4','.','');                                    
 
                                     //MENENTUKAN NILAI TERBESAR
+                                    $rekomendasi ="";
                                     if($prob_obatA > $prob_obatB && $prob_obatA > $prob_obatC){
                                         $rekomendasi =  "Obat A";
                                     }elseif($prob_obatB > $prob_obatC) {
